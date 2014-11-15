@@ -4,7 +4,7 @@
     app.controller('DigitsController', function() {
         this.couple = digits;
     });
-
+    //test push
     var digits = [
         {
             digitCouple: '01',
