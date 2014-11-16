@@ -1,6 +1,7 @@
 div.listOfDigitsCoupleElement {
     float:left;
     border: 1px solid black;
+    margin-top: 10px;
     margin-left: 15px;
     padding: 2px 5px;
 }

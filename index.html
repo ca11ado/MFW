@@ -3,23 +3,30 @@
 <head>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="css/myStyle.css" />
+    <script type="text/javascript" src="lib/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="lib/angular.min.js"></script>
     <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/bind.js"></script>
 </head>
 
 <body ng-controller="DigitsController as digitCouple">
-
 <header>
     <h1 class="text-center">MFW</h1>
     <h2 class="text-center">Mnemonic Find Words</h2>
 </header>
-<div id="digitSequenceWrap">
-    <h2><span ng-repeat="couple in digitCouple.couple">{{couple.digitCouple}}</span></h2>
+<div id="wrapInput">
+    <form ng-controller="InputController as inputCtrl" ng-submit="inputCtrl.addDigits(digits)" novalidate>
+        <input type="number" required />
+        <input type="submit" value="add">
+    </form>
 </div>
+
 <div id="listOfDigitsCouple">
-    <div class="listOfDigitsCoupleElement" ng-repeat="couple in digitCouple.couple">
-        <h4>{{couple.description}}</h4>
-        <ul id="listOfWords" ng-repeat="word in couple.words">
+    <div class="listOfDigitsCoupleElement" ng-repeat="selected in digitCouple.selected">
+        <h3>{{selected}}</h3>
+        <h4>{{digitCouple.couple[selected].description}}</h4>
+
+        <ul id="listOfWords" ng-repeat="word in digitCouple.couple[selected].words">
             <li class="wordElement">{{word.word}}</li>
         </ul>
     </div>
