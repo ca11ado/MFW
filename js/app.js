@@ -1,23 +1,25 @@
 (function() {
     var app = angular.module('mfw', []);
 
-    app.controller('DigitsController', function() {
-        this.couple = digits;
-        this.selected = selectedDigitsCouples;
+    app.factory('serviceId', ['$scope', function ($scope) {
+    }]);
 
-    });
-    app.controller('InputController', function () {
+    app.controller('DigitsController', ['$scope',function($scope) {
+        this.couple = digits;
+        $scope.selected = selectedDigitsCouples;
+    }]);
+    app.controller('InputController', ['$scope',function ($scope) {
         this.inputDigits = {};
 
         //console.log('changes');
-    });
+    }]);
     var INTEGER_REGEXP = /^\-?\d+$/;
-    app.directive('integer', function() {
+    app.directive('integer',function() {
+        //console.log($scope.test);
         return {
             require: 'ngModel',
-            link: function(scope, elm, attrs, ctrl) {
+            link: function($scope, elm, attrs, ctrl) {
                 ctrl.$validators.integer = function(modelValue, viewValue) {
-                    //console.log('checked!');
                     if (ctrl.$isEmpty(modelValue)) {
                         // consider empty models to be valid
                         return true;
@@ -30,7 +32,7 @@
                         for (var i=0; i<viewValue.length;i++) {
                             couple += viewValue[i];
                             if (i%2 != 0) {
-                                selectedDigitsCouples.push(couple);
+                                $scope.selected.push(couple);
                                 couple = '';
                             }
                         }
