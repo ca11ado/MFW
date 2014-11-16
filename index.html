@@ -16,8 +16,7 @@
 </header>
 <div id="wrapInput">
     <form ng-controller="InputController as inputCtrl" ng-submit="inputCtrl.addDigits(digits)" novalidate>
-        <input type="number" required />
-        <input type="submit" value="add">
+        <input id="inputDigits" type="text" ng-model="number" integer />
     </form>
 </div>
 

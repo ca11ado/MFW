@@ -8,3 +8,14 @@ div.listOfDigitsCoupleElement {
 ul#listOfWords {
     padding-left: 20px;
 }
+
+#inputDigits {
+    margin-left: 15px;
+}
+#inputDigits.ng-valid {
+    border: 1px solid green;
+}
+#inputDigits.ng-invalid {
+    border: 1px solid red;
+    background-color: red;
+}
