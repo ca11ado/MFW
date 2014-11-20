@@ -5,8 +5,20 @@
     }]);
 
     app.controller('DigitsController', ['$scope',function($scope) {
+        //дополняем пустой массив
+        for (var i=0; i<9; i++) {
+            for (var d=0; d < 9; d++) {
+                var key = i + '' + d;
+                if (!digits[key]) digits[key] = {
+                    digitCouple: 'пусто',
+                    description: '(рц)(рц)',
+                    words: [0,1]
+                };
+            }
+        }
         this.couple = digits;
-        $scope.selected = selectedDigitsCouples;
+        $scope.selected = ['01','02'];
+        console.log($scope.selected);
     }]);
     app.controller('InputController', ['$scope',function ($scope) {
         this.inputDigits = {};
@@ -26,16 +38,23 @@
                     }
 
                     if (INTEGER_REGEXP.test(viewValue) && viewValue.length%2 == 0) {
-                        console.log('true');
+                        /*console.log('true');
                         selectedDigitsCouples = [];
                         var couple = ''; // {string}
+                        //$scope.selected = ['01'];
                         for (var i=0; i<viewValue.length;i++) {
                             couple += viewValue[i];
                             if (i%2 != 0) {
+                                console.log(couple);
                                 $scope.selected.push(couple);
                                 couple = '';
                             }
                         }
+                        console.log($scope.selected);*/
+                        console.log('true statement')
+                        setTimeout(function () {
+                            $scope.selected.push('11');
+                        }, 1000);
                         return true;
                     }
 
@@ -99,5 +118,8 @@
         }
     };
 
+    window.addCouple = function () {
+
+    };
 
 })();
