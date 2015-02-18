@@ -7,7 +7,27 @@
     <script src="http://fb.me/react-0.12.2.js"></script>
 </head>
 
+<body>
+<header>
+    <h1 class="text-center">MFW</h1>
+    <h2 class="text-center">Mnemonic Find Words</h2>
+</header>
+<div id="wrapInput">
+    <form>
+        <input id="inputDigits" type="text"/>
+    </form>
+</div>
 
+<div id="listOfDigitsCouple">
+    <div class="listOfDigitsCoupleElement">
+        <h3>{{selected}}</h3>
+        <h4>{{digitCouple.couple[selected].description}}</h4>
+
+        <ul id="listOfWords">
+            <li class="wordElement">{{word.word}}</li>
+        </ul>
+    </div>
+</div>
 
 </body>
 </html>
