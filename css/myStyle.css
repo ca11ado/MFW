@@ -1,21 +1,5 @@
-div.listOfDigitsCoupleElement {
-    float:left;
-    border: 1px solid black;
-    margin-top: 10px;
-    margin-left: 15px;
-    padding: 2px 5px;
-}
-ul#listOfWords {
-    padding-left: 20px;
-}
-
-#inputDigits {
-    margin-left: 15px;
-}
-#inputDigits.ng-valid {
-    border: 1px solid green;
-}
-#inputDigits.ng-invalid {
-    border: 1px solid red;
-    background-color: red;
+.wordsset {
+    width: 200px;
+    height: 24px;
+    background-color: #ffff00;
 }

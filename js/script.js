@@ -14,6 +14,26 @@ var SearchBar = React.createClass({
     }
 });
 
+var Word = React.createClass({
+    render: function(){
+        return (
+            <span className="oneWord"></span>
+        );
+    }
+});
+
+var WordsSet = React.createClass({
+    render: function(){
+        return (
+            <div className="wordsset">
+
+            </div>
+        );
+    }
+});
+
+
+
 
 var HomePage = React.createClass({
     render: function(){
@@ -21,6 +41,7 @@ var HomePage = React.createClass({
             <div>
                 <Header />
                 <SearchBar />
+                <WordsSet />
             </div>
         );
     }
