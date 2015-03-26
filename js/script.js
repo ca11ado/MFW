@@ -7,9 +7,12 @@ var Header = React.createClass({
 });
 
 var SearchBar = React.createClass({
+    searchHand: function(event){
+        this.props.searchHandler(event.target.value);
+    },
     render: function(){
         return (
-            <input type="search" />
+            <input type="search" onChange={this.searchHand}/>
         );
     }
 });
@@ -17,17 +20,18 @@ var SearchBar = React.createClass({
 var Word = React.createClass({
     render: function(){
         return (
-            <span className="oneWord"></span>
+            <span className="oneWord">{this.props.word.name}</span>
         );
     }
 });
 
 var WordsSet = React.createClass({
     render: function(){
+        var words = this.props.words.map(function(word){
+            return <Word word={word}/>;
+        });
         return (
-            <div className="wordsset">
-
-            </div>
+            <div>{words}</div>
         );
     }
 });
@@ -36,18 +40,24 @@ var WordsSet = React.createClass({
 
 
 var HomePage = React.createClass({
+    getInitialState: function() {
+        return {words: []}
+    },
+    searchHandler: function(id){
+        this.props.service.findById(id).done(function(result){ this.setState({words:[result]}) }.bind(this));
+    },
     render: function(){
         return (
             <div>
                 <Header />
-                <SearchBar />
-                <WordsSet />
+                <SearchBar searchHandler={this.searchHandler}/>
+                <WordsSet words = {this.state.words}/>
             </div>
         );
     }
 });
 
 React.render(
-    <HomePage/>,
+    <HomePage service={wordService}/>,
     document.body
 );
