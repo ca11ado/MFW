@@ -43,8 +43,8 @@ var HomePage = React.createClass({
     getInitialState: function() {
         return {words: []}
     },
-    searchHandler: function(id){
-        this.props.service.findById(id).done(function(result){ this.setState({words:[result]}) }.bind(this));
+    searchHandler: function(number){
+        this.props.service.findByCifrMethod(number).done(function(result){ this.setState({words:result}) }.bind(this));
     },
     render: function(){
         return (
