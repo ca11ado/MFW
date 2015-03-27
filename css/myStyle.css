@@ -6,3 +6,7 @@
 .oneWord {
     margin-right: 3px;
 }
+
+.wordsList {
+    float: left;
+}

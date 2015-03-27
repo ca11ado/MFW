@@ -31,7 +31,7 @@ var WordsSet = React.createClass({
             return <Word word={word}/>;
         });
         return (
-            <ul>{words}</ul>
+            <ul className="wordsList">{words}</ul>
         );
     }
 });
