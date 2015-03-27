@@ -40,6 +40,7 @@ wordService = (function () {
                 secondDigit,
                 regexp,
                 results = [],
+                wordsetResult,
                 digitToChar = {
                     0:'лн',
                     1:'рц',
@@ -60,9 +61,10 @@ wordService = (function () {
                         firstDigit = digitToChar[number[i-1]];
                         secondDigit = digitToChar[number[i]];
                         regexp = new RegExp('^[уеыайъоэяиюьё]{0,2}['+firstDigit+']{1}[уеыаоэяйъиюьё]{0,2}['+secondDigit+']{1}[а-я]*$');                        ;
-                        results = words.filter(function (element) {
+                        wordsetResult = words.filter(function (element) {
                             return regexp.test(element.name);
                         });
+                        results.push(wordsetResult);
                     }
                 }
             } else {

@@ -20,7 +20,7 @@ var SearchBar = React.createClass({
 var Word = React.createClass({
     render: function(){
         return (
-            <span className="oneWord">{this.props.word.name}</span>
+            <li className="oneWord">{this.props.word.name}</li>
         );
     }
 });
@@ -31,7 +31,19 @@ var WordsSet = React.createClass({
             return <Word word={word}/>;
         });
         return (
-            <div>{words}</div>
+            <ul>{words}</ul>
+        );
+    }
+});
+
+
+var WordsSetList = React.createClass({
+    render: function(){
+        var wordsSetList = this.props.wordsSetList.map(function(words){
+            return <WordsSet words = {words}/>;
+        });
+        return (
+            <div>{wordsSetList}</div>
         );
     }
 });
@@ -51,7 +63,7 @@ var HomePage = React.createClass({
             <div>
                 <Header />
                 <SearchBar searchHandler={this.searchHandler}/>
-                <WordsSet words = {this.state.words}/>
+                <WordsSetList wordsSetList = {this.state.words}/>
             </div>
         );
     }
