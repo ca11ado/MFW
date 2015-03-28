@@ -39,6 +39,7 @@ wordService = (function () {
                 firstDigit,
                 secondDigit,
                 regexp,
+                error,
                 results = [],
                 wordsetResult,
                 digitToChar = {
@@ -68,9 +69,9 @@ wordService = (function () {
                     }
                 }
             } else {
-                console.log('Not a number in search bar');
+                error = 'Not a number in search bar';
             }
-            deferred.resolve(results);
+            deferred.resolve(error,results);
             return deferred.promise();
         },
 
