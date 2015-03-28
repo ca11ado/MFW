@@ -1,3 +1,6 @@
+#wrapMain{
+    margin-left: 10px;
+}
 .wordsset {
     width: 200px;
     height: 24px;
@@ -9,4 +12,12 @@
 
 .wordsList {
     float: left;
+}
+
+#inputDigit {
+    width: 500px;
+}
+
+#infoField {
+    color: red;
 }

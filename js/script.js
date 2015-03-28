@@ -6,13 +6,21 @@ var Header = React.createClass({
     }
 });
 
+var InfoField = React.createClass({
+    render: function(){
+        return (
+            <div id="infoField">{this.props.infoText}</div>
+        );
+    }
+});
+
 var SearchBar = React.createClass({
     searchHand: function(event){
         this.props.searchHandler(event.target.value);
     },
     render: function(){
         return (
-            <input type="search" onChange={this.searchHand}/>
+            <input id="inputDigit" type="search" onChange={this.searchHand}/>
         );
     }
 });
@@ -53,15 +61,16 @@ var WordsSetList = React.createClass({
 
 var HomePage = React.createClass({
     getInitialState: function() {
-        return {words: []}
+        return {words: [], infoText: 'Here will be information text'};
     },
     searchHandler: function(number){
         this.props.service.findByCifrMethod(number).done(function(result){ this.setState({words:result}) }.bind(this));
     },
     render: function(){
         return (
-            <div>
+            <div id="wrapMain">
                 <Header />
+                <InfoField infoText={this.state.infoText} />
                 <SearchBar searchHandler={this.searchHandler}/>
                 <WordsSetList wordsSetList = {this.state.words}/>
             </div>
