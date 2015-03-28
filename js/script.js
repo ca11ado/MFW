@@ -67,11 +67,7 @@ var HomePage = React.createClass({
         this.props.service.findByCifrMethod(number)
             .done(
                 function(err, result){
-                    if(err){
-                        this.setState({infoText:err, words: []})
-                    } else {
-                        this.setState({infoText:'',words:result})
-                    }
+                    this.setState({infoText:err,words:result});
                 }
             .bind(this));
     },

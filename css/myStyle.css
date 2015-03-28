@@ -19,5 +19,7 @@
 }
 
 #infoField {
+    width: 500px;
+    height: 16px;
     color: red;
 }
