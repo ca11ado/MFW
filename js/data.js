@@ -74,6 +74,20 @@ wordService = (function () {
             deferred.resolve(error,results);
             return deferred.promise();
         },
+        findFromDict = function(){
+            $.ajax('dict/read.php').done(function(str){
+                var re = new RegExp (/[а-я]{4,16}\s{1}\d{1}\s{1}[м]{1}/g);
+                var result = [];
+                var m;
+                while ((m = re.exec(str)) !== null) {
+                    if (m.index === re.lastIndex) {
+                        re.lastIndex++;
+                    }
+                    result.push(m[0].substring(0,m[0].indexOf(' ')));
+                }
+                console.log('result %o', result);
+            })
+        },
 
         words = [
             {"id": 1, name: 'мама'}, // 99
