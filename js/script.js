@@ -35,9 +35,12 @@ var Word = React.createClass({
 
 var WordsSet = React.createClass({
     render: function(){
-        var words = this.props.words.map(function(word){
-            return <Word word={word}/>;
-        });
+        var emptyCouple = {name:'...'};
+        var words = this.props.words.length
+            ? this.props.words.map(function(word){
+                 return <Word word={word}/>;
+                })
+            : [<Word word={emptyCouple}/>];
         return (
             <ul className="wordsList">{words}</ul>
         );
