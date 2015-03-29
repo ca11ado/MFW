@@ -39,6 +39,8 @@ wordService = (function () {
                 firstDigit,
                 secondDigit,
                 regexp,
+                re,
+                pageName,
                 error,
                 results = [],
                 wordsetResult,
@@ -53,6 +55,18 @@ wordService = (function () {
                     7:'с',
                     8:'вф',
                     9:'м'
+                },
+                charToPage={
+                    'л':'Z_171',
+                    'р':'Z_224',
+                    'д':'Z_164',
+                    'т':'Z_226',
+                    'ч':'Z_231',
+                    'п':'Z_175',
+                    'ш':'Z_232',
+                    'с':'Z_225',
+                    'в':'Z_162',
+                    'м':'Z_172'
                 };
             if (/^\d*$/.test(number)){
                 for (var i=0; i < number.length; i++){
@@ -61,17 +75,35 @@ wordService = (function () {
                         console.log('Couple %o', couple);
                         firstDigit = digitToChar[number[i-1]];
                         secondDigit = digitToChar[number[i]];
-                        regexp = new RegExp('^[уеыайъоэяиюьё]{0,2}['+firstDigit+']{1}[уеыаоэяйъиюьё]{0,2}['+secondDigit+']{1}[а-я]*$');                        ;
-                        wordsetResult = words.filter(function (element) {
-                            return regexp.test(element.name);
-                        });
-                        results.push(wordsetResult);
+                        re = new RegExp (/[а-я]{4,16}\s{1}\d{1}\s{1}[м]{1}/g);
+                        regexp = new RegExp('^[уеыайъоэяиюьё]{0,2}['+firstDigit+']{1}[уеыаоэяйъиюьё]{0,2}['+secondDigit+']{1}[а-я]*$');
+                        pageName = charToPage[firstDigit[0]];
+                        $.post('dict/read.php',{page:pageName}).done(
+                            function(str){
+
+                                var onlyWords = [];
+                                var m;
+                                while ((m = re.exec(str)) !== null) {
+                                    if (m.index === re.lastIndex) {
+                                        re.lastIndex++;
+                                    }
+                                    onlyWords.push(m[0].substring(0,m[0].indexOf(' ')));
+                                }
+                                //console.log('onlybwords %o', onlyWords);
+                                wordsetResult = onlyWords.filter(function (element) {
+                                    return regexp.test(element);
+                                });
+                                //console.log('wordsetResult %o', wordsetResult);
+                                results.push(wordsetResult);
+                                deferred.resolve(error,results);
+                            }
+                        );
                     }
                 }
             } else {
                 error = 'Not a number in search bar';
+                deferred.resolve(error,results);
             }
-            deferred.resolve(error,results);
             return deferred.promise();
         },
         findFromDict = function(){

@@ -28,14 +28,14 @@ var SearchBar = React.createClass({
 var Word = React.createClass({
     render: function(){
         return (
-            <li className="oneWord">{this.props.word.name}</li>
+            <li className="oneWord">{this.props.word}</li>
         );
     }
 });
 
 var WordsSet = React.createClass({
     render: function(){
-        var emptyCouple = {name:'...'};
+        var emptyCouple = '...';
         var words = this.props.words.length
             ? this.props.words.map(function(word){
                  return <Word word={word}/>;
