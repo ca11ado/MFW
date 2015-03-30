@@ -11,6 +11,9 @@ for ($i=160; $i < 240; $i++){
         $f = $param;
     }
 }
+if ($param == 'dictionary.js') {
+    $f = $param;
+}
 if($f){
     $f1 = file_get_contents($f);
     echo $f1;
