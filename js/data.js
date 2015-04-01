@@ -73,21 +73,8 @@ wordService = (function () {
                 if (number && inputDigitLen%2 === 0){
                     couple = number[inputDigitLen-2] +''+ number[inputDigitLen-1];
                     console.log('Couple %o', couple);
-                    firstDigit = digitToChar[number[inputDigitLen-2]];
-                    secondDigit = digitToChar[number[inputDigitLen-1]];
-                    re = new RegExp (/[а-я]{4,16}\s{1}\d{1}\s{1}[м]{1}/g);
-                    regexp = new RegExp('^[уеыайъоэяиюьё]{0,2}['+firstDigit+']{1}[уеыаоэяйъиюьё]{0,2}['+secondDigit+']{1}[а-я]*$');
-                    pageName = charToPage[firstDigit[0]];
 
-                    wordsetResult = words.filter(function (element) {
-                        return regexp.test(element);
-                    });
-                    //console.log('wordsetResult %o', wordsetResult);
-                    wordsetResult.sort(randOrd);
-                    wordsetResult.length = 20;
-                    //results.push(wordsetResult);
-
-                    currentResult[number.length/2-1] = wordsetResult;
+                    currentResult[number.length/2-1] = findCoupleFromDict(couple);
                 }
             } else {
                 error = 'Not a number in search bar';
@@ -96,19 +83,38 @@ wordService = (function () {
             deferred.resolve(error,currentResult);
             return deferred.promise();
         },
-        findFromDict = function(){
-            $.ajax('dict/read.php').done(function(str){
-                var re = new RegExp (/[а-я]{4,16}\s{1}\d{1}\s{1}[м]{1}/g);
-                var result = [];
-                var m;
-                while ((m = re.exec(str)) !== null) {
-                    if (m.index === re.lastIndex) {
-                        re.lastIndex++;
-                    }
-                    result.push(m[0].substring(0,m[0].indexOf(' ')));
-                }
-                console.log('result %o', result);
-            })
+        findCoupleFromDict = function(coupleOfDigit){
+            var re,
+                regexp,
+                couple,
+                firstDigit,
+                secondDigit,
+                wordsetResult,
+                digitToChar = {
+                    0:'лн',
+                    1:'рц',
+                    2:'дг',
+                    3:'тз',
+                    4:'чкх',
+                    5:'пб',
+                    6:'шщж',
+                    7:'с',
+                    8:'вф',
+                    9:'м'
+                };
+            couple = coupleOfDigit;
+            firstDigit = digitToChar[couple[0]];
+            secondDigit = digitToChar[couple[1]];
+            re = new RegExp (/[а-я]{4,16}\s{1}\d{1}\s{1}[м]{1}/g);
+            regexp = new RegExp('^[уеыайъоэяиюьё]{0,2}['+firstDigit+']{1}[уеыаоэяйъиюьё]{0,2}['+secondDigit+']{1}[а-я]*$');
+
+            wordsetResult = words.filter(function (element) {
+                return regexp.test(element);
+            });
+            wordsetResult.sort(randOrd);
+            wordsetResult.length = 20;
+            return wordsetResult;
+
         },
 
         randOrd = function (){
