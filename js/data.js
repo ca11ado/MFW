@@ -33,7 +33,7 @@ wordService = (function () {
             return deferred.promise();
         },
 
-        findByCifrMethod = function(number){
+        findByCifrMethod = function(number, currentResult){
             var deferred = $.Deferred();
             var couple,
                 firstDigit,
@@ -44,6 +44,7 @@ wordService = (function () {
                 error,
                 results = [],
                 wordsetResult,
+                inputDigitLen = number.length,
                 digitToChar = {
                     0:'лн',
                     1:'рц',
@@ -69,30 +70,30 @@ wordService = (function () {
                     'м':'Z_172'
                 };
             if (/^\d*$/.test(number)){
-                for (var i=0; i < number.length; i++){
-                    if (i%2) {
-                        couple = number[i-1] +''+ number[i];
-                        console.log('Couple %o', couple);
-                        firstDigit = digitToChar[number[i-1]];
-                        secondDigit = digitToChar[number[i]];
-                        re = new RegExp (/[а-я]{4,16}\s{1}\d{1}\s{1}[м]{1}/g);
-                        regexp = new RegExp('^[уеыайъоэяиюьё]{0,2}['+firstDigit+']{1}[уеыаоэяйъиюьё]{0,2}['+secondDigit+']{1}[а-я]*$');
-                        pageName = charToPage[firstDigit[0]];
+                if (number && inputDigitLen%2 === 0){
+                    couple = number[inputDigitLen-2] +''+ number[inputDigitLen-1];
+                    console.log('Couple %o', couple);
+                    firstDigit = digitToChar[number[inputDigitLen-2]];
+                    secondDigit = digitToChar[number[inputDigitLen-1]];
+                    re = new RegExp (/[а-я]{4,16}\s{1}\d{1}\s{1}[м]{1}/g);
+                    regexp = new RegExp('^[уеыайъоэяиюьё]{0,2}['+firstDigit+']{1}[уеыаоэяйъиюьё]{0,2}['+secondDigit+']{1}[а-я]*$');
+                    pageName = charToPage[firstDigit[0]];
 
-                        wordsetResult = words.filter(function (element) {
-                            return regexp.test(element);
-                        });
-                        //console.log('wordsetResult %o', wordsetResult);
-                        wordsetResult.sort(randOrd);
-                        wordsetResult.length = 20;
-                        results.push(wordsetResult);
-                    }
+                    wordsetResult = words.filter(function (element) {
+                        return regexp.test(element);
+                    });
+                    //console.log('wordsetResult %o', wordsetResult);
+                    wordsetResult.sort(randOrd);
+                    wordsetResult.length = 20;
+                    //results.push(wordsetResult);
+
+                    currentResult[number.length/2-1] = wordsetResult;
                 }
             } else {
                 error = 'Not a number in search bar';
             }
 
-            deferred.resolve(error,results);
+            deferred.resolve(error,currentResult);
             return deferred.promise();
         },
         findFromDict = function(){

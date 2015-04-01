@@ -70,7 +70,7 @@ var HomePage = React.createClass({
         return {words: [], infoText: 'Here will be information text'};
     },
     searchHandler: function(number){
-        this.props.service.findByCifrMethod(number)
+        this.props.service.findByCifrMethod(number, this.state.words)
             .done(
                 function(err, result){
                     this.setState({infoText:err,words:result});
