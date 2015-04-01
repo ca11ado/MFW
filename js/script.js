@@ -18,7 +18,10 @@ var SearchBar = React.createClass({
     searchHand: function(event){
         this.props.searchHandler(event.target.value);
     },
-    render: function(){
+    componentDidMount: function(){
+        $('#inputDigit').focus();
+    },
+        render: function(){
         return (
             <input id="inputDigit" type="search" onChange={this.searchHand}/>
         );
