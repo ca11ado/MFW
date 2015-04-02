@@ -16,8 +16,11 @@ var InfoField = React.createClass({
 
 var Story = React.createClass({
     render: function(){
+        var Story = this.props.story.map(function(word,index){
+            return word + ' ';
+        }.bind(this));
         return (
-            <div id="story">{this.props.story}</div>
+            <div id="story">{Story}</div>
         );
     }
 });
@@ -38,8 +41,8 @@ var SearchBar = React.createClass({
 
 var Word = React.createClass({
     addWordToStory: function(ev, reactId){
-        this.props.addStory($(ev.currentTarget).text());
-        console.log('orderSet %o', this.props.numberOfSet);
+        this.props.addStory($(ev.currentTarget).text(),this.props.numberOfSet);
+        //console.log('orderSet %o', this.props.numberOfSet);
     },
     render: function(){
         return (
@@ -79,7 +82,7 @@ var WordsSetList = React.createClass({
 
 var HomePage = React.createClass({
     getInitialState: function() {
-        return {words: [], infoText: 'Here will be information text', lastNumber:'', story:''};
+        return {words: [], infoText: 'Here will be information text', lastNumber:'', story:[]};
     },
     searchHandler: function(number){
         this.props.service.findByCifrMethod(number, this.state.words, this.state.lastNumber)
@@ -92,8 +95,10 @@ var HomePage = React.createClass({
                 }
             .bind(this));
     },
-    addStory: function(word) {
-        this.setState({story:this.state.story + word + ' '});
+    addStory: function(word, numberOfSet) {
+        var story = this.state.story;
+        story[numberOfSet] = word;
+        this.setState({story:story});
     },
     render: function(){
         return (
