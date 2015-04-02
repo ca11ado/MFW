@@ -29,10 +29,7 @@ var SearchBar = React.createClass({
     searchHand: function(event){
         this.props.searchHandler(event.target.value);
     },
-    componentDidMount: function(){
-        $('#inputDigit').focus();
-    },
-        render: function(){
+    render: function(){
         return (
             <input id="inputDigit" type="search" onChange={this.searchHand}/>
         );
@@ -89,6 +86,12 @@ var WordsSetList = React.createClass({
 var HomePage = React.createClass({
     getInitialState: function() {
         return {words: [], infoText: 'Here will be information text', lastNumber:'', story:[]};
+    },
+    componentDidMount: function(){
+        $('#inputDigit').focus();
+    },
+    componentDidUpdate: function(){
+        $('#inputDigit').focus();
     },
     searchHandler: function(number){
         this.props.service.findByCifrMethod(number, this.state.words, this.state.lastNumber)
