@@ -39,7 +39,7 @@ var SearchBar = React.createClass({
 var Word = React.createClass({
     addWordToStory: function(ev, reactId){
         this.props.addStory($(ev.currentTarget).text());
-        //console.log('event %o', ev);
+        console.log('orderSet %o', this.props.numberOfSet);
     },
     render: function(){
         return (
@@ -52,8 +52,8 @@ var WordsSet = React.createClass({
     render: function(){
         var emptyCouple = '...';
         var words = this.props.words.length
-            ? this.props.words.map(function(word){
-                 return <Word addStory = {this.props.addStory} word={word}/>;
+            ? this.props.words.map(function(word, index){
+                return <Word numberOfSet={this.props.numberOfSet} addStory = {this.props.addStory} word={word}/>;
         }.bind(this))
             : [<Word word={emptyCouple}/>];
         return (
@@ -65,8 +65,8 @@ var WordsSet = React.createClass({
 
 var WordsSetList = React.createClass({
     render: function(){
-        var wordsSetList = this.props.wordsSetList.map(function(words){
-            return <WordsSet addStory = {this.props.addStory} words = {words}/>;
+        var wordsSetList = this.props.wordsSetList.map(function(words,index){
+            return <WordsSet numberOfSet={index} addStory = {this.props.addStory} words = {words}/>;
         }.bind(this));
         return (
             <div>{wordsSetList}</div>
