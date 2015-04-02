@@ -31,7 +31,9 @@ var SearchBar = React.createClass({
     },
     render: function(){
         return (
+            <form>
             <input id="inputDigit" type="search" onChange={this.searchHand}/>
+            </form>
         );
     }
 });
