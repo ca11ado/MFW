@@ -33,30 +33,12 @@ wordService = (function () {
             return deferred.promise();
         },
 
-        findByCifrMethod = function(number, currentResult){
+        findByCifrMethod = function(number, currentResult, lastNumber){
             var deferred = $.Deferred();
             var couple,
-                firstDigit,
-                secondDigit,
-                regexp,
-                re,
-                pageName,
                 error,
-                results = [],
-                wordsetResult,
+                result = [],
                 inputDigitLen = number.length,
-                digitToChar = {
-                    0:'лн',
-                    1:'рц',
-                    2:'дг',
-                    3:'тз',
-                    4:'чкх',
-                    5:'пб',
-                    6:'шщж',
-                    7:'с',
-                    8:'вф',
-                    9:'м'
-                },
                 charToPage={
                     'л':'Z_171',
                     'р':'Z_224',
@@ -72,15 +54,31 @@ wordService = (function () {
             if (/^\d*$/.test(number)){
                 if (number && inputDigitLen%2 === 0){
                     couple = number[inputDigitLen-2] +''+ number[inputDigitLen-1];
-                    console.log('Couple %o', couple);
+                    //lastNumber = lastNumber.substring(0,lastNumber.length-1);
+                    //console.log('Couple %o number %o lastNumber %o', couple, number, lastNumber);
 
-                    currentResult[number.length/2-1] = findCoupleFromDict(couple);
+                    // number difference
+                    if (lastNumber.length < number.length){ // add couple
+                        currentResult[currentResult.length] = findCoupleFromDict(couple);
+                    } else if(number.length === lastNumber.length){ // usually need to renew last couple
+                        currentResult[currentResult.length-1] = findCoupleFromDict(couple);
+                    } else {
+                        currentResult.pop();
+                    }
+
+                } else {
+                    error = 'Last digit does not have a couple';
+                    if (!number) {
+                        error = 'Empty input field';
+                        currentResult = [];
+
+                    }
                 }
             } else {
                 error = 'Not a number in search bar';
             }
-
-            deferred.resolve(error,currentResult);
+            result = currentResult;
+            deferred.resolve(error,result);
             return deferred.promise();
         },
         findCoupleFromDict = function(coupleOfDigit){

@@ -67,13 +67,16 @@ var WordsSetList = React.createClass({
 
 var HomePage = React.createClass({
     getInitialState: function() {
-        return {words: [], infoText: 'Here will be information text'};
+        return {words: [], infoText: 'Here will be information text', lastNumber:''};
     },
     searchHandler: function(number){
-        this.props.service.findByCifrMethod(number, this.state.words)
+        this.props.service.findByCifrMethod(number, this.state.words, this.state.lastNumber)
             .done(
                 function(err, result){
                     this.setState({infoText:err,words:result});
+                    if (number.length%2 === 0) {
+                        this.setState({lastNumber:number});
+                    }
                 }
             .bind(this));
     },
