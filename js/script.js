@@ -14,6 +14,14 @@ var InfoField = React.createClass({
     }
 });
 
+var Story = React.createClass({
+    render: function(){
+        return (
+            <div id="story">{this.props.story}</div>
+        );
+    }
+});
+
 var SearchBar = React.createClass({
     searchHand: function(event){
         this.props.searchHandler(event.target.value);
@@ -29,9 +37,13 @@ var SearchBar = React.createClass({
 });
 
 var Word = React.createClass({
+    addWordToStory: function(ev, reactId){
+        this.props.addStory($(ev.currentTarget).text());
+        //console.log('event %o', ev);
+    },
     render: function(){
         return (
-            <li className="oneWord">{this.props.word}</li>
+            <li onClick={this.addWordToStory} className="oneWord">{this.props.word}</li>
         );
     }
 });
@@ -41,8 +53,8 @@ var WordsSet = React.createClass({
         var emptyCouple = '...';
         var words = this.props.words.length
             ? this.props.words.map(function(word){
-                 return <Word word={word}/>;
-                })
+                 return <Word addStory = {this.props.addStory} word={word}/>;
+        }.bind(this))
             : [<Word word={emptyCouple}/>];
         return (
             <ul className="wordsList">{words}</ul>
@@ -54,8 +66,8 @@ var WordsSet = React.createClass({
 var WordsSetList = React.createClass({
     render: function(){
         var wordsSetList = this.props.wordsSetList.map(function(words){
-            return <WordsSet words = {words}/>;
-        });
+            return <WordsSet addStory = {this.props.addStory} words = {words}/>;
+        }.bind(this));
         return (
             <div>{wordsSetList}</div>
         );
@@ -67,7 +79,7 @@ var WordsSetList = React.createClass({
 
 var HomePage = React.createClass({
     getInitialState: function() {
-        return {words: [], infoText: 'Here will be information text', lastNumber:''};
+        return {words: [], infoText: 'Here will be information text', lastNumber:'', story:''};
     },
     searchHandler: function(number){
         this.props.service.findByCifrMethod(number, this.state.words, this.state.lastNumber)
@@ -80,13 +92,17 @@ var HomePage = React.createClass({
                 }
             .bind(this));
     },
+    addStory: function(word) {
+        this.setState({story:this.state.story + word + ' '});
+    },
     render: function(){
         return (
             <div id="wrapMain">
                 <Header />
                 <InfoField infoText={this.state.infoText} />
+                <Story story={this.state.story} />
                 <SearchBar searchHandler={this.searchHandler}/>
-                <WordsSetList wordsSetList = {this.state.words}/>
+                <WordsSetList addStory = {this.addStory} wordsSetList = {this.state.words}/>
             </div>
         );
     }
