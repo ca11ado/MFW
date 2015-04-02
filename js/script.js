@@ -40,13 +40,19 @@ var SearchBar = React.createClass({
 });
 
 var Word = React.createClass({
+    getInitialState: function(){
+        return {cssName:'wordOfSet'+this.props.numberOfSet}
+    },
     addWordToStory: function(ev, reactId){
         this.props.addStory($(ev.currentTarget).text(),this.props.numberOfSet);
         //console.log('orderSet %o', this.props.numberOfSet);
+        $('.'+ this.state.cssName).removeClass('selectedWord');
+        $(ev.currentTarget).addClass('selectedWord');
+
     },
     render: function(){
         return (
-            <li onClick={this.addWordToStory} className="oneWord">{this.props.word}</li>
+            <li onClick={this.addWordToStory} className={this.state.cssName}>{this.props.word}</li>
         );
     }
 });

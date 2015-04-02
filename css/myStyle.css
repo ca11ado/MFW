@@ -9,6 +9,13 @@
 .oneWord {
     margin-right: 3px;
 }
+.selectedWord {
+    background-color:lightgreen;
+}
+
+#story {
+    height: 16px;
+}
 
 .wordsList {
     float: left;
