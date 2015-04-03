@@ -51,3 +51,8 @@
 #inputDigit {
     width: 250px;
 }
+
+/* Story */
+#clearStory{
+    color: blue;
+}

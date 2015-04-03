@@ -15,12 +15,16 @@ var InfoField = React.createClass({
 });
 
 var Story = React.createClass({
+    clearClick: function(){
+        this.props.clearStory();
+    },
     render: function(){
         var Story = this.props.story.map(function(word,index){
             return word + ' ';
         }.bind(this));
+        var clear = Story.length ? 'x' : '';
         return (
-            <div id="wrapStory"><p className="text-success">{Story}</p></div>
+            <div id="wrapStory"><p className="text-success">{Story}<span onClick={this.clearClick} id="clearStory">{clear}</span></p></div>
         );
     }
 });
@@ -78,8 +82,12 @@ var WordsSetList = React.createClass({
         var wordsSetList = this.props.wordsSetList.map(function(words,index){
             return <WordsSet numberOfSet={index} addStory = {this.props.addStory} words = {words}/>;
         }.bind(this));
+        var header = wordsSetList.length ? 'Выбери слова:' : '';
         return (
-            <div id="wrapWordsLists">{wordsSetList}</div>
+            <div id="wrapWordsLists">
+                <h4>{header}</h4>
+                {wordsSetList}
+            </div>
         );
     }
 });
@@ -113,13 +121,16 @@ var HomePage = React.createClass({
         story[numberOfSet] = word;
         this.setState({story:story});
     },
+    clearStory: function(){
+        this.setState({story:[]});
+    },
     render: function(){
         return (
             <div id="wrapMain">
                 <Header />
                 <InfoField infoText={this.state.infoText} />
                 <SearchBar searchHandler={this.searchHandler}/>
-                <Story story={this.state.story} />
+                <Story clearStory={this.clearStory} story={this.state.story} />
                 <WordsSetList addStory = {this.addStory} wordsSetList = {this.state.words}/>
             </div>
         );
