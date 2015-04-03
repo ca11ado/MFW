@@ -1,6 +1,37 @@
 #wrapMain{
+    width: 800px;
+    height: 600px;
+    /*border: 1px solid black;*/
     margin-left: 10px;
 }
+#wrapInfoField{
+    width: 250px;
+    height: 24px;
+    /*border:1px solid purple;*/
+    color: red;
+}
+#wrapSearchBar {
+    width: 250px;
+    height: 24px;
+    /*border: 1px solid yellow;*/
+    float: left;
+}
+#wrapStory {
+    width: 400px;
+    height: 25px;
+    padding-left: 20px;
+    float: left;
+    /*border: 1px solid green;*/
+}
+
+#wrapWordsLists{
+    width: 100%;
+    height: 300px;
+    /*border: 1px solid orange;*/
+    padding-top: 25px;
+    float: left;
+}
+
 .wordsset {
     width: 200px;
     height: 24px;
@@ -13,20 +44,10 @@
     background-color:lightgreen;
 }
 
-#story {
-    height: 16px;
-}
-
 .wordsList {
     float: left;
 }
 
 #inputDigit {
-    width: 500px;
-}
-
-#infoField {
-    width: 500px;
-    height: 16px;
-    color: red;
+    width: 250px;
 }

@@ -9,7 +9,7 @@ var Header = React.createClass({
 var InfoField = React.createClass({
     render: function(){
         return (
-            <div id="infoField">{this.props.infoText}</div>
+            <div id="wrapInfoField">{this.props.infoText}</div>
         );
     }
 });
@@ -20,7 +20,7 @@ var Story = React.createClass({
             return word + ' ';
         }.bind(this));
         return (
-            <div id="story">{Story}</div>
+            <div id="wrapStory"><p className="text-success">{Story}</p></div>
         );
     }
 });
@@ -31,9 +31,11 @@ var SearchBar = React.createClass({
     },
     render: function(){
         return (
-            <form>
-            <input id="inputDigit" type="search" onChange={this.searchHand}/>
-            </form>
+            <div id="wrapSearchBar">
+                <form>
+                    <input id="inputDigit" type="search" onChange={this.searchHand}/>
+                </form>
+            </div>
         );
     }
 });
@@ -77,7 +79,7 @@ var WordsSetList = React.createClass({
             return <WordsSet numberOfSet={index} addStory = {this.props.addStory} words = {words}/>;
         }.bind(this));
         return (
-            <div>{wordsSetList}</div>
+            <div id="wrapWordsLists">{wordsSetList}</div>
         );
     }
 });
@@ -116,8 +118,8 @@ var HomePage = React.createClass({
             <div id="wrapMain">
                 <Header />
                 <InfoField infoText={this.state.infoText} />
-                <Story story={this.state.story} />
                 <SearchBar searchHandler={this.searchHandler}/>
+                <Story story={this.state.story} />
                 <WordsSetList addStory = {this.addStory} wordsSetList = {this.state.words}/>
             </div>
         );

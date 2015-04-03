@@ -110,7 +110,7 @@ wordService = (function () {
                 return regexp.test(element);
             });
             wordsetResult.sort(randOrd);
-            wordsetResult.length = 20;
+            wordsetResult.length = 10;
             return wordsetResult;
 
         },
