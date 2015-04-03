@@ -123,6 +123,7 @@ var HomePage = React.createClass({
     },
     clearStory: function(){
         this.setState({story:[]});
+        $('li').removeClass('selectedWord');
     },
     render: function(){
         return (
