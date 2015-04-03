@@ -93,6 +93,20 @@ var WordsSetList = React.createClass({
 });
 
 
+var Legenda = React.createClass({
+    render: function(){
+        return (
+            <div id="wrapLegend">
+                <ul>
+                    <li>Вбить число, которое нужно запомнить</li>
+                    <li>Чтобы обновить список слов для пары чисел, удалить и вбить пару чисел заново.
+                    Работает только для последней пары цифр набранного сисла</li>
+                    <li>Нажать на слово в списке, чтобф использовать его в предложении для запоминания</li>
+                </ul>
+            </div>
+        );
+    }
+});
 
 
 var HomePage = React.createClass({
@@ -133,6 +147,7 @@ var HomePage = React.createClass({
                 <SearchBar searchHandler={this.searchHandler}/>
                 <Story clearStory={this.clearStory} story={this.state.story} />
                 <WordsSetList addStory = {this.addStory} wordsSetList = {this.state.words}/>
+                <Legenda/>
             </div>
         );
     }
