@@ -3,9 +3,19 @@ var useref = require('gulp-useref');
 var uglify = require('gulp-uglify');
 var gulpIf = require('gulp-if');
 var minifyCSS = require('gulp-minify-css');
-var react = require('gulp-react');
 var babel = require('gulp-babel');
+var del = require('del');
+var runSequence = require('run-sequence');
+//var batch = require('gulp-batch');
 
+//Наблюдает изменения *.jsx и запускает babel
+gulp.task('watch', function () {
+    gulp.watch('dev/js/*.jsx', function(){
+        runSequence('babel');
+    });
+});
+
+// запускает минификацию и конк-ию файлов, указанных в index.html и перенесоит в production
 gulp.task('useref', function(){
 	var assets = useref.assets();
 
@@ -18,14 +28,24 @@ gulp.task('useref', function(){
 		.pipe(gulp.dest(''))
 });
 
-/*gulp.task('react', function () {
-    return gulp.src('dev/js/!*.jsx')
-        .pipe(react({harmony:true}))
-        .pipe(gulp.dest('dev/js/'));
-});*/
-
+// транслирует jsx в javascript
 gulp.task('babel', function(){
     return gulp.src('dev/js/*.jsx')
         .pipe(babel())
         .pipe(gulp.dest('dev/js/'));
+});
+
+// очистка файлов (пока не используется)
+gulp.task('clean:prod', function (callback) {
+    del(['js','css'],callback);
+});
+
+// дефолтная задача с очередью
+gulp.task('default', function (callback) {
+    runSequence('babel', 'watch');
+});
+
+// запустить в production
+gulp.task('build', function () {
+    runSequence('babel', 'useref');
 });
