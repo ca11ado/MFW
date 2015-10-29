@@ -154,7 +154,7 @@ var HomePage = React.createClass({
     }
 });
 
-React.render(
+ReactDOM.render(
     <HomePage service={wordService}/>,
-    document.body
+    document.getElementById('wrapper')
 );
