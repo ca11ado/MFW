@@ -67,7 +67,7 @@ var WordsSet = React.createClass({
         var emptyCouple = '...';
         var words = this.props.words.length
             ? this.props.words.map(function(word, index){
-                return <Word numberOfSet={this.props.numberOfSet} addStory = {this.props.addStory} word={word}/>;
+                return <Word key={index} numberOfSet={this.props.numberOfSet} addStory = {this.props.addStory} word={word}/>;
         }.bind(this))
             : [<Word word={emptyCouple}/>];
         return (
@@ -80,7 +80,7 @@ var WordsSet = React.createClass({
 var WordsSetList = React.createClass({
     render: function(){
         var wordsSetList = this.props.wordsSetList.map(function(words,index){
-            return <WordsSet numberOfSet={index} addStory = {this.props.addStory} words = {words}/>;
+            return <WordsSet key={index} numberOfSet={index} addStory = {this.props.addStory} words = {words}/>;
         }.bind(this));
         var header = wordsSetList.length ? 'Выбери слова:' : '';
         return (
