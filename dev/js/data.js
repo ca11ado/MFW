@@ -51,7 +51,7 @@ wordService = (function () {
                     'в':'Z_162',
                     'м':'Z_172'
                 };
-            if (/^\d*$/.test(number)){
+            if (/^\d{1,18}$/.test(number)){
                 if (number && inputDigitLen%2 === 0){
                     couple = number[inputDigitLen-2] +''+ number[inputDigitLen-1];
                     //lastNumber = lastNumber.substring(0,lastNumber.length-1);
@@ -74,6 +74,8 @@ wordService = (function () {
 
                     }
                 }
+            } else if (/^\d*$/.test(number) && number !== '') {
+                error = 'There are eighteen digits in search bar maximum';
             } else {
                 error = 'Not a number in search bar';
             }
