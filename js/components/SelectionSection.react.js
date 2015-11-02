@@ -1,9 +1,10 @@
 /**
  * Created by tos on 02.11.2015.
  */
+
 var React = require('react');
 
-var WordsSection = React.createClass({
+var SelectionSection = React.createClass({
 
     /*getInitialState: function(){},
      componentDidMount: function() {},
@@ -11,10 +12,10 @@ var WordsSection = React.createClass({
     render: function() {
         return (
             <div>
-                <p>WordsSection component</p>
+                <p>SelectionSection component</p>
             </div>
         );
     }
 });
 
-module.exports = WordsSection;
+module.exports = SelectionSection;

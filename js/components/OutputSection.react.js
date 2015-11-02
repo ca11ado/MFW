@@ -1,9 +1,10 @@
 /**
  * Created by tos on 02.11.2015.
  */
+
 var React = require('react');
 
-var Legenda = React.createClass({
+var OutputSection = React.createClass({
 
     /*getInitialState: function(){},
      componentDidMount: function() {},
@@ -11,10 +12,10 @@ var Legenda = React.createClass({
     render: function() {
         return (
             <div>
-                <p>Legenda component</p>
+                <p>OutputSection component</p>
             </div>
         );
     }
 });
 
-module.exports = Legenda;
+module.exports = OutputSection;

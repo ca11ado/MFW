@@ -4,9 +4,11 @@
 'use strict';
 
 var React = require('react');
-var SearchingSection = require('./SearchingSection.react');
-var WordsSection = require('./WordsSection.react');
-var Legenda = require('./Legenda.react');
+var InfoSection = require('./InfoSection.react');
+var InputSection = require('./InfoSection.react');
+var SelectionSection = require('./SelectionSection.react');
+var OutputSection = require('./OutputSection.react');
+var LegendaSection = require('./LegendaSection.react');
 var MfwStore = require('../stores/MfwStore');
 
 function getMfwState() {
@@ -25,9 +27,11 @@ var MfwApp = React.createClass({
     render: function() {
         return (
             <div>
-                <SearchingSection />
-                <WordsSection />
-                <Legenda />
+                <InfoSection />
+                <InputSection />
+                <SelectionSection />
+                <OutputSection />
+                <LegendaSection />
             </div>
         );
     }

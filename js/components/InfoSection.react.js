@@ -1,9 +1,10 @@
 /**
  * Created by tos on 02.11.2015.
  */
+
 var React = require('react');
 
-var SearchingSection = React.createClass({
+var InfoSection = React.createClass({
 
     /*getInitialState: function(){},
      componentDidMount: function() {},
@@ -11,10 +12,10 @@ var SearchingSection = React.createClass({
     render: function() {
         return (
             <div>
-                <p>SearchingSection component</p>
+                <p>InfoSection component</p>
             </div>
         );
     }
 });
 
-module.exports = SearchingSection;
+module.exports = InfoSection;
