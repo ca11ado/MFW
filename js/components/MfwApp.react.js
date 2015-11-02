@@ -2,6 +2,9 @@
  * Created by tos on 02.11.2015.
  */
 var React = require('react');
+var SearchingSection = require('./SearchingSection.react');
+var WordsSection = require('./WordsSection.react');
+var Legenda = require('./Legenda.react');
 
 var MfwApp = React.createClass({
 
@@ -10,7 +13,11 @@ var MfwApp = React.createClass({
     componentWillUnmount: function(){},*/
     render: function() {
         return (
-            <h2>This is my first React component</h2>
+            <div>
+                <SearchingSection />
+                <WordsSection />
+                <Legenda />
+            </div>
         );
     }
 });
