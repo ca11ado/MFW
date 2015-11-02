@@ -1,17 +1,25 @@
 /**
  * Created by tos on 02.11.2015.
  */
+
 var React = require('react');
+var ReactPropTypes = React.PropTypes;
 
 var LegendaSection = React.createClass({
 
-    /*getInitialState: function(){},
-     componentDidMount: function() {},
-     componentWillUnmount: function(){},*/
+    propTypes: {
+        getRules: ReactPropTypes.array.isRequired
+    },
+
     render: function() {
+        var rules = this.props.getRules;
+        /*var legenda = rules.map(function(val,index,arr){
+            return '<li>' + val + '</li>';
+        });*/
+
         return (
             <div>
-                <p>LegendaSection component</p>
+                <ul>{rules}</ul>
             </div>
         );
     }

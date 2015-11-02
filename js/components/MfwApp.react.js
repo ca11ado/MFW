@@ -13,16 +13,17 @@ var MfwStore = require('../stores/MfwStore');
 
 function getMfwState() {
     // get state from the store
-    /*return {
-        infoText: MfwStore.getInfoText(),
-        searchHandler: MfwStore.getSearchHandler()
-    }*/
+    return {
+        getRules: MfwStore.getRules()
+    }
 }
 
 var MfwApp = React.createClass({
 
-    /*getInitialState: function(){},
-    componentDidMount: function() {},
+    getInitialState: function(){
+        return getMfwState();
+    },
+    /*componentDidMount: function() {},
     componentWillUnmount: function(){},*/
     render: function() {
         return (
@@ -31,7 +32,7 @@ var MfwApp = React.createClass({
                 <InputSection />
                 <SelectionSection />
                 <OutputSection />
-                <LegendaSection />
+                <LegendaSection getRules={this.state.getRules} />
             </div>
         );
     }
