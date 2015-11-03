@@ -21,7 +21,7 @@ var _rules = [
   _selectedWords = [];
 
 function updateAll(numbers) {
-  _textHandler = numbers;
+  updateInputNumber(numbers);
   updateInfo('Enter number');
 }
 
@@ -30,7 +30,7 @@ function updateInfo(text) {
 }
 
 function updateInputNumber(numbers) {
-
+  _textHandler = numbers;
 }
 
 var MfwStore = assign({}, EventEmitter.prototype, {
