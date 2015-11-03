@@ -4,12 +4,13 @@
 
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
+var MfwActions = require('../actions/MfwActions');
 
 var InputSection = React.createClass({
 
   getInitialState: function() {
     return {
-      //value: '',
+      value: this.props.value || '',
       placeholder : 'Enter number' // ???
     }
   },
@@ -25,27 +26,28 @@ var InputSection = React.createClass({
       <input
         id={this.props.id}
         placeholder={this.props.placeholder}
-        onBlur={this._save}
+        //onBlur={this._save}
         onChange={this._onChange}
-        onKeyDown={this._onKeyDown}
-        //value={this.state.value}
-        autoFocus={false}
+        //onKeyDown={this._onKeyDown}
+        value={this.state.value}
+        autoFocus={true}
         />
     );
   },
 
-  _onChange: function () {
-    this._save();
+  _onChange: function (event) {
+    var value = event.target.value;
+    this.setState({value: value});
+    this._save(value);
   },
 
   _onKeyDown: function (event) {
     if (event.keyCode === 13) {
-      this._save();
     }
   },
 
-  _save: function () {
-    console.log('save');
+  _save: function (value) {
+    MfwActions.updateText(value);
   }
 });
 
