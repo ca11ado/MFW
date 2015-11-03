@@ -13,7 +13,7 @@ var InfoSection = React.createClass({
 
     render: function() {
         return (
-            <div>
+            <div id="infoText">
                 <p>{this.props.getInfo}</p>
             </div>
         );
