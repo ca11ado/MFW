@@ -16,7 +16,8 @@ function getMfwState() {
     return {
         getRules: MfwStore.getRules(),
         getInfo: MfwStore.getInformation(),
-        getTextHandler: MfwStore.getTextHandler()
+        getTextHandler: MfwStore.getTextHandler(),
+        getSelectedWords: MfwStore.getSelectedWords()
     }
 }
 
@@ -38,7 +39,7 @@ var MfwApp = React.createClass({
             <div>
                 <InfoSection getInfo={this.state.getInfo} />
                 <InputSection id='inputText' getHandler={this.state.getTextHandler} />
-                <SelectionSection />
+                <SelectionSection id='selection' getSelected={this.state.getSelectedWords} />
                 <OutputSection />
                 <LegendaSection getRules={this.state.getRules} />
             </div>

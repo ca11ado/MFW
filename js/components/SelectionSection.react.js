@@ -3,19 +3,24 @@
  */
 
 var React = require('react');
+var ReactPropTypes = React.PropTypes;
 
 var SelectionSection = React.createClass({
 
-    /*getInitialState: function(){},
-     componentDidMount: function() {},
-     componentWillUnmount: function(){},*/
-    render: function() {
-        return (
-            <div>
-                <p>SelectionSection component</p>
-            </div>
-        );
-    }
+  propTypes: {
+    getSelected: ReactPropTypes.array.isRequired
+  },
+
+  render: function() {
+    var words = this.props.getSelected.map(function(v,index,arr){
+      return React.createElement('span', {key:index}, v + ' ');
+    });
+    return (
+      <div>
+        {words}
+      </div>
+    );
+  }
 });
 
 module.exports = SelectionSection;

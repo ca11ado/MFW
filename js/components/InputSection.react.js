@@ -18,7 +18,7 @@ var InputSection = React.createClass({
   propTypes: {
     id: ReactPropTypes.string,
     placeholder: ReactPropTypes.string,
-    //value: ReactPropTypes.string,
+    value: ReactPropTypes.string,
     getHandler: ReactPropTypes.string
   },
 

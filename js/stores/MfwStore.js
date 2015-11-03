@@ -17,18 +17,27 @@ var _rules = [
     'Максимум 9 пар чисел'
   ],
   _infoSecText = 'Enter number',
-  _textHandler = '';
+  _textHandler = '',
+  _selectedWords = [];
 
 function updateAll(numbers) {
-  updateInfo('Enter number');
   _textHandler = numbers;
+  updateInfo('Enter number');
 }
 
 function updateInfo(text) {
-  return _infoSecText = text;
+  _infoSecText = text;
+}
+
+function updateInputNumber(numbers) {
+
 }
 
 var MfwStore = assign({}, EventEmitter.prototype, {
+
+  getSelectedWords: function(){
+    return _selectedWords;
+  },
 
   getRules: function() {
     return _rules;
@@ -72,7 +81,7 @@ AppDispatcher.register(function (action) {
 });
 
 /*setTimeout(function(){
- _infoSecText = 'Test';
+  _selectedWords.push('мама','дед');
  MfwStore.emit(CHANGE_EVENT);
  },2000);*/
 
