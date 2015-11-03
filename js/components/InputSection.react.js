@@ -10,7 +10,7 @@ var InputSection = React.createClass({
 
   getInitialState: function() {
     return {
-      //value: '',
+      value: '',
       placeholder : 'Enter number' // ???
     }
   },
@@ -23,22 +23,21 @@ var InputSection = React.createClass({
   },
 
   render: function() {
+    var test = 'test';
     return (
       <input
         id={this.props.id}
         placeholder={this.props.placeholder}
         onChange={this._onChange}
-        //value={this.state.getHandler}
+        value={this.props.getHandler}
         autoFocus={true}
         />
     );
   },
 
   _onChange: function (event) {
-    /*var value = event.target.value;
+    var value = event.target.value;
     this._save(value);
-    console.log(this.state);*/
-    console.log(this.props.value);
   },
 
   _onKeyDown: function (event) {

@@ -16,12 +16,12 @@ var _rules = [
     'Нажать на слово в списке, чтобы использовать его в предложении для запоминания',
     'Максимум 9 пар чисел'
   ],
-  _infoSecText = 'It shows information for you',
+  _infoSecText = 'Enter number',
   _textHandler = '';
 
 function updateAll(numbers) {
-  updateInfo('');
-  _textHandler = number;
+  updateInfo('Enter number');
+  _textHandler = numbers;
 }
 
 function updateInfo(text) {
@@ -59,9 +59,7 @@ var MfwStore = assign({}, EventEmitter.prototype, {
 AppDispatcher.register(function (action) {
   switch (action.actionType) {
     case MfwConstans.MFW_UPDATE_TEXT:
-      console.log('There is registered callback for this action!');
-      // проверка на число
-      if (/^\d*$/.test(action.text)) {
+      if (/^\d*$/.test(action.text)) { // проверка на число
         updateAll(action.text);
       } else {
         updateInfo('Вы можете вводить только цифры');
