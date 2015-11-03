@@ -20,7 +20,12 @@ var _rules = [
   _textHandler = '';
 
 function updateAll(numbers) {
+  updateInfo('');
+  _textHandler = number;
+}
 
+function updateInfo(text) {
+  return _infoSecText = text;
 }
 
 var MfwStore = assign({}, EventEmitter.prototype, {
@@ -55,6 +60,12 @@ AppDispatcher.register(function (action) {
   switch (action.actionType) {
     case MfwConstans.MFW_UPDATE_TEXT:
       console.log('There is registered callback for this action!');
+      // проверка на число
+      if (/^\d*$/.test(action.text)) {
+        updateAll(action.text);
+      } else {
+        updateInfo('Вы можете вводить только цифры');
+      }
       MfwStore.emitChange();
       break;
     default:

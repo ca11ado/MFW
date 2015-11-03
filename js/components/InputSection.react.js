@@ -10,7 +10,7 @@ var InputSection = React.createClass({
 
   getInitialState: function() {
     return {
-      value: this.props.value || '',
+      //value: '',
       placeholder : 'Enter number' // ???
     }
   },
@@ -18,7 +18,8 @@ var InputSection = React.createClass({
   propTypes: {
     id: ReactPropTypes.string,
     placeholder: ReactPropTypes.string,
-    value: ReactPropTypes.string
+    //value: ReactPropTypes.string,
+    getHandler: ReactPropTypes.string
   },
 
   render: function() {
@@ -26,19 +27,18 @@ var InputSection = React.createClass({
       <input
         id={this.props.id}
         placeholder={this.props.placeholder}
-        //onBlur={this._save}
         onChange={this._onChange}
-        //onKeyDown={this._onKeyDown}
-        value={this.state.value}
+        //value={this.state.getHandler}
         autoFocus={true}
         />
     );
   },
 
   _onChange: function (event) {
-    var value = event.target.value;
-    this.setState({value: value});
+    /*var value = event.target.value;
     this._save(value);
+    console.log(this.state);*/
+    console.log(this.props.value);
   },
 
   _onKeyDown: function (event) {
