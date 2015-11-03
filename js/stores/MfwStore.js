@@ -4,6 +4,7 @@
 
 var EventEmitter = require('events').EventEmitter;
 var MfwConstans = require('../constants/MfwConstants');
+var MfwDictionary = require('../constants/MfwDictionary');
 var AppDispatcher = require('../dispatcher/MfwDispatcher');
 var assign = require('object-assign');
 
