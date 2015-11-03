@@ -15,7 +15,8 @@ var _rules = [
         'Нажать на слово в списке, чтобы использовать его в предложении для запоминания',
         'Максимум 9 пар чисел'
     ],
-    _infoSecText = 'Here will be shown some information for you';
+    _infoSecText = 'It shows information for you',
+    _textHandler = '';
 
 var MfwStore = assign({}, EventEmitter.prototype, {
 
@@ -25,6 +26,10 @@ var MfwStore = assign({}, EventEmitter.prototype, {
 
     getInformation: function() {
         return _infoSecText;
+    },
+
+    getTextHandler: function() {
+        return _textHandler;
     },
 
     addChangeListener: function(callback){

@@ -5,7 +5,7 @@
 
 var React = require('react');
 var InfoSection = require('./InfoSection.react');
-var InputSection = require('./InfoSection.react');
+var InputSection = require('./InputSection.react');
 var SelectionSection = require('./SelectionSection.react');
 var OutputSection = require('./OutputSection.react');
 var LegendaSection = require('./LegendaSection.react');
@@ -15,7 +15,8 @@ function getMfwState() {
     // get state from the store
     return {
         getRules: MfwStore.getRules(),
-        getInfo: MfwStore.getInformation()
+        getInfo: MfwStore.getInformation(),
+        getTextHandler: MfwStore.getTextHandler()
     }
 }
 
@@ -36,7 +37,7 @@ var MfwApp = React.createClass({
         return (
             <div>
                 <InfoSection getInfo={this.state.getInfo} />
-                <InputSection />
+                <InputSection id='inputText' getHandler={this.state.getTextHandler} />
                 <SelectionSection />
                 <OutputSection />
                 <LegendaSection getRules={this.state.getRules} />
