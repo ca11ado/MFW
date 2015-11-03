@@ -23,8 +23,14 @@ var MfwApp = React.createClass({
     getInitialState: function(){
         return getMfwState();
     },
-    /*componentDidMount: function() {},
-    componentWillUnmount: function(){},*/
+
+    componentDidMount: function() {
+        MfwStore.addChangeListener(this._onChange);
+    },
+    componentWillUnmount: function() {
+        MfwStore.removeChangeListener(this._onChange);
+    },
+
     render: function() {
         return (
             <div>
@@ -35,6 +41,10 @@ var MfwApp = React.createClass({
                 <LegendaSection getRules={this.state.getRules} />
             </div>
         );
+    },
+
+    _onChange: function() {
+        this.setState(getMfwState());
     }
 });
 

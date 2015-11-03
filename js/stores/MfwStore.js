@@ -20,6 +20,18 @@ var MfwStore = assign({}, EventEmitter.prototype, {
 
     getRules: function() {
         return _rules;
+    },
+
+    addChangeListener: function(callback){
+        this.on(CHANGE_EVENT, callback);
+    },
+
+    removeChangeListener: function(callaback) {
+        this.removeListener(CHANGE_EVENT, callaback);
+    },
+
+    emitChange: function() {
+        this.emit(CHANGE_EVENT);
     }
 
 });

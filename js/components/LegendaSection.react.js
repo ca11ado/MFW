@@ -13,13 +13,13 @@ var LegendaSection = React.createClass({
 
     render: function() {
         var rules = this.props.getRules;
-        /*var legenda = rules.map(function(val,index,arr){
-            return '<li>' + val + '</li>';
-        });*/
+        var legenda = rules.map(function(val,index,arr){
+            return React.createElement('li','',val);
+        });
 
         return (
             <div>
-                <ul>{rules}</ul>
+                <ul>{legenda}</ul>
             </div>
         );
     }
