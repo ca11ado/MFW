@@ -3,16 +3,18 @@
  */
 
 var React = require('react');
+var ReactPropTypes = React.PropTypes;
 
 var InfoSection = React.createClass({
 
-    /*getInitialState: function(){},
-     componentDidMount: function() {},
-     componentWillUnmount: function(){},*/
+    propTypes: {
+        getInfo: ReactPropTypes.string.isRequired
+    },
+
     render: function() {
         return (
             <div>
-                <p>InfoSection component</p>
+                <p>{this.props.getInfo}</p>
             </div>
         );
     }

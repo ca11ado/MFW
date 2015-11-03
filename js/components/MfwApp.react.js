@@ -14,7 +14,8 @@ var MfwStore = require('../stores/MfwStore');
 function getMfwState() {
     // get state from the store
     return {
-        getRules: MfwStore.getRules()
+        getRules: MfwStore.getRules(),
+        getInfo: MfwStore.getInformation()
     }
 }
 
@@ -34,7 +35,7 @@ var MfwApp = React.createClass({
     render: function() {
         return (
             <div>
-                <InfoSection />
+                <InfoSection getInfo={this.state.getInfo} />
                 <InputSection />
                 <SelectionSection />
                 <OutputSection />
