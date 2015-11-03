@@ -8,7 +8,7 @@ var ReactPropTypes = React.PropTypes;
 var InfoSection = React.createClass({
 
     propTypes: {
-        getInfo: ReactPropTypes.string.isRequired
+        getInfo: ReactPropTypes.string
     },
 
     render: function() {

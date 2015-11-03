@@ -41,4 +41,9 @@ var MfwStore = assign({}, EventEmitter.prototype, {
 
 });
 
+/*setTimeout(function(){
+    _infoSecText = 'Test';
+    MfwStore.emit(CHANGE_EVENT);
+},2000);*/
+
 module.exports = MfwStore;

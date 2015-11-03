@@ -14,7 +14,7 @@ var LegendaSection = React.createClass({
     render: function() {
         var rules = this.props.getRules;
         var legenda = rules.map(function(val,index,arr){
-            return React.createElement('li','',val);
+            return React.createElement('li',{key:index},val);
         });
 
         return (
