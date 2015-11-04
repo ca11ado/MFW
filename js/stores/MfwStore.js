@@ -6,7 +6,7 @@ var EventEmitter = require('events').EventEmitter;
 var MfwConstants = require('../constants/MfwConstants');
 var AppDispatcher = require('../dispatcher/MfwDispatcher');
 var MfwOutputStore = require('./MfwOutputStore');
-var Lib = require('./Lib');
+var Lib = require('./SmallLib');
 var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';

@@ -7,7 +7,7 @@ var MfwConstants = require('../constants/MfwConstants');
 //var MfwDictionary = require('../constants/MfwDictionary');
 var MfwWordsService = require('./MfwWordService');
 var AppDispatcher = require('../dispatcher/MfwDispatcher');
-var Lib = require('./Lib');
+var Lib = require('./SmallLib');
 var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
