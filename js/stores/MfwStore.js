@@ -6,6 +6,7 @@ var EventEmitter = require('events').EventEmitter;
 var MfwConstants = require('../constants/MfwConstants');
 var AppDispatcher = require('../dispatcher/MfwDispatcher');
 var MfwOutputStore = require('./MfwOutputStore');
+var Lib = require('./Lib');
 var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
@@ -78,14 +79,14 @@ var MfwStore = assign({}, EventEmitter.prototype, {
 
 MfwStore.dispatchToken = AppDispatcher.register(function (action) {
   AppDispatcher.waitFor([MfwOutputStore.dispatchToken]);
-
+  var error;
   switch (action.actionType) {
+
     case MfwConstants.MFW_UPDATE_INPUT:
-      if (/^\d*$/.test(action.text)) { // проверка на число
-        updateAll(action.text);
-      } else {
-        updateInfo('Вы можете вводить только цифры');
-      }
+      error = Lib.restrictions(action.text).error;
+      if (error) updateInfo(error);
+      else updateAll(action.text);
+
       MfwStore.emitChange();
       break;
     default:

@@ -6,6 +6,7 @@ var EventEmitter = require('events').EventEmitter;
 var MfwConstants = require('../constants/MfwConstants');
 var MfwDictionary = require('../constants/MfwDictionary');
 var AppDispatcher = require('../dispatcher/MfwDispatcher');
+var Lib = require('./Lib');
 var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
@@ -46,12 +47,12 @@ var MfwOutputStore = assign({}, EventEmitter.prototype, {
 });
 
 MfwOutputStore.dispatchToken = AppDispatcher.register(function(action){
+  var error;
 
   switch (action.actionType) {
     case MfwConstants.MFW_UPDATE_INPUT:
-      if (/^\d*$/.test(action.text)) { // проверка на число
-        updateCouples(action.text);
-      }
+      error = Lib.restrictions(action.text).error;
+      if (!error) updateCouples(action.text);
       MfwOutputStore.emitChange();
       break;
     default:
