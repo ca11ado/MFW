@@ -3,9 +3,9 @@
  */
 
 var EventEmitter = require('events').EventEmitter;
-var MfwConstans = require('../constants/MfwConstants');
-var MfwDictionary = require('../constants/MfwDictionary');
+var MfwConstants = require('../constants/MfwConstants');
 var AppDispatcher = require('../dispatcher/MfwDispatcher');
+var MfwOutputStore = require('./MfwOutputStore');
 var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
@@ -19,9 +19,11 @@ var _rules = [
   ],
   _infoSecText = 'Enter number',
   _textHandler = '',
-  _selectedWords = [];
+  _selectedWords = [],
+  _output = [];
 
 function updateAll(numbers) {
+  updateOutput(numbers); // before updateInputNumber()
   updateInputNumber(numbers);
   updateInfo('Enter number');
 }
@@ -32,6 +34,14 @@ function updateInfo(text) {
 
 function updateInputNumber(numbers) {
   _textHandler = numbers;
+}
+
+function updateOutput(numbers){
+  if (numbers > _textHandler) {
+
+  } else if (numbers < _textHandler) {
+
+  }
 }
 
 var MfwStore = assign({}, EventEmitter.prototype, {
@@ -66,9 +76,11 @@ var MfwStore = assign({}, EventEmitter.prototype, {
 
 });
 
-AppDispatcher.register(function (action) {
+MfwStore.dispatchToken = AppDispatcher.register(function (action) {
+  AppDispatcher.waitFor([MfwOutputStore.dispatchToken]);
+
   switch (action.actionType) {
-    case MfwConstans.MFW_UPDATE_TEXT:
+    case MfwConstants.MFW_UPDATE_INPUT:
       if (/^\d*$/.test(action.text)) { // проверка на число
         updateAll(action.text);
       } else {

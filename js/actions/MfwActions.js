@@ -9,7 +9,7 @@ var MfwActions = {
 
   updateText: function(text) {
     AppDispatcher.dispatch({
-      actionType: MfwConstants.MFW_UPDATE_TEXT,
+      actionType: MfwConstants.MFW_UPDATE_INPUT,
       text: text
     });
   }

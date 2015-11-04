@@ -3,19 +3,42 @@
  */
 
 var React = require('react');
+var MfwOutputStore = require('../stores/MfwOutputStore');
+
+function getMfwOutputState() {
+  return {
+    couples: MfwOutputStore.getCouples()
+  }
+}
 
 var OutputSection = React.createClass({
 
-    /*getInitialState: function(){},
-     componentDidMount: function() {},
-     componentWillUnmount: function(){},*/
-    render: function() {
-        return (
-            <div>
-                <p>OutputSection component</p>
-            </div>
-        );
-    }
+  getInitialState: function() {
+    return getMfwOutputState();
+  },
+
+  componentDidMount: function() {
+    MfwOutputStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function() {
+    MfwOutputStore.removeChangeListener(this._onChange)
+  },
+
+  render: function() {
+    var couples = this.state.couples.map(function(v,index,arr) {
+      return React.createElement('span', {key:index}, v);
+    });
+    return (
+      <div>
+        {couples}
+      </div>
+    );
+  },
+
+  _onChange: function() {
+    this.setState(getMfwOutputState());
+  }
 });
 
 module.exports = OutputSection;

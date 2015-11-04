@@ -12,43 +12,43 @@ var LegendaSection = require('./LegendaSection.react');
 var MfwStore = require('../stores/MfwStore');
 
 function getMfwState() {
-    // get state from the store
-    return {
-        getRules: MfwStore.getRules(),
-        getInfo: MfwStore.getInformation(),
-        getTextHandler: MfwStore.getTextHandler(),
-        getSelectedWords: MfwStore.getSelectedWords()
-    }
+  // get state from the store
+  return {
+    getRules: MfwStore.getRules(),
+    getInfo: MfwStore.getInformation(),
+    getTextHandler: MfwStore.getTextHandler(),
+    getSelectedWords: MfwStore.getSelectedWords()
+  }
 }
 
 var MfwApp = React.createClass({
 
-    getInitialState: function(){
-        return getMfwState();
-    },
+  getInitialState: function(){
+    return getMfwState();
+  },
 
-    componentDidMount: function() {
-        MfwStore.addChangeListener(this._onChange);
-    },
-    componentWillUnmount: function() {
-        MfwStore.removeChangeListener(this._onChange);
-    },
+  componentDidMount: function() {
+    MfwStore.addChangeListener(this._onChange);
+  },
+  componentWillUnmount: function() {
+    MfwStore.removeChangeListener(this._onChange);
+  },
 
-    render: function() {
-        return (
-            <div>
-                <InfoSection getInfo={this.state.getInfo} />
-                <InputSection id='inputText' getHandler={this.state.getTextHandler} />
-                <SelectionSection id='selection' getSelected={this.state.getSelectedWords} />
-                <OutputSection />
-                <LegendaSection getRules={this.state.getRules} />
-            </div>
-        );
-    },
+  render: function() {
+    return (
+      <div>
+        <InfoSection getInfo={this.state.getInfo} />
+        <InputSection id='inputText' getHandler={this.state.getTextHandler} />
+        <SelectionSection id='selection' getSelected={this.state.getSelectedWords} />
+        <OutputSection />
+        <LegendaSection getRules={this.state.getRules} />
+      </div>
+    );
+  },
 
-    _onChange: function() {
-        this.setState(getMfwState());
-    }
+  _onChange: function() {
+    this.setState(getMfwState());
+  }
 });
 
 module.exports = MfwApp;
