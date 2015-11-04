@@ -1,3 +1,7 @@
 #infoText {
   color:green;
 }
+.outputCouples {
+  width: 100px;
+  float:left;
+}

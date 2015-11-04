@@ -27,7 +27,7 @@ var OutputSection = React.createClass({
 
   render: function() {
     var couples = this.state.couples.map(function(v,index,arr) {
-      return React.createElement('span', {key:index}, v);
+      return React.createElement('div', {key:index, className: 'outputCouples'}, v);
     });
     return (
       <div>

@@ -10,7 +10,20 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 
-var _digitsCouples = [];
+var _digitsCouples = [],
+  _lastInput;
+
+function updateCouples(numbers){
+  _digitsCouples = [];
+  var str = '';
+  for (var i=0; i<numbers.length; i++) {
+    str += numbers[i];
+    if (i%2 !== 0 || i === numbers.length-1) {
+      _digitsCouples.push(str);
+      str = '';
+    }
+  }
+}
 
 var MfwOutputStore = assign({}, EventEmitter.prototype, {
 
@@ -34,11 +47,12 @@ var MfwOutputStore = assign({}, EventEmitter.prototype, {
 
 MfwOutputStore.dispatchToken = AppDispatcher.register(function(action){
 
-  console.log('dispatch MfwOutputStore');
-
   switch (action.actionType) {
     case MfwConstants.MFW_UPDATE_INPUT:
-
+      if (/^\d*$/.test(action.text)) { // проверка на число
+        updateCouples(action.text);
+      }
+      MfwOutputStore.emitChange();
       break;
     default:
       //nothing
