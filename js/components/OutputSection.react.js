@@ -30,7 +30,7 @@ var OutputSection = React.createClass({
       return React.createElement('div', {key:index, className: 'outputCouples'}, v);
     });
     return (
-      <div>
+      <div id={this.props.id}>
         {couples}
       </div>
     );

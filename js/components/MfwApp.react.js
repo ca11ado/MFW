@@ -36,12 +36,12 @@ var MfwApp = React.createClass({
 
   render: function() {
     return (
-      <div>
-        <InfoSection getInfo={this.state.getInfo} />
-        <InputSection id='inputText' getHandler={this.state.getTextHandler} />
-        <SelectionSection id='selection' getSelected={this.state.getSelectedWords} />
-        <OutputSection />
-        <LegendaSection getRules={this.state.getRules} />
+      <div id='wrapMain'>
+        <InfoSection id='wrapInfoField' getInfo={this.state.getInfo} />
+        <InputSection id='wrapSearchBar' getHandler={this.state.getTextHandler} />
+        <SelectionSection id='wrapStory' getSelected={this.state.getSelectedWords} />
+        <OutputSection id='wrapWordsLists' />
+        <LegendaSection id='wrapLegend' getRules={this.state.getRules} />
       </div>
     );
   },

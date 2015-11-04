@@ -18,7 +18,7 @@ var LegendaSection = React.createClass({
         });
 
         return (
-            <div>
+            <div id={this.props.id}>
                 <ul>{legenda}</ul>
             </div>
         );
