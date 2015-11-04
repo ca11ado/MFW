@@ -4,7 +4,8 @@
 
 var EventEmitter = require('events').EventEmitter;
 var MfwConstants = require('../constants/MfwConstants');
-var MfwDictionary = require('../constants/MfwDictionary');
+//var MfwDictionary = require('../constants/MfwDictionary');
+var MfwWordsService = require('./MfwWordService');
 var AppDispatcher = require('../dispatcher/MfwDispatcher');
 var Lib = require('./Lib');
 var assign = require('object-assign');
@@ -12,6 +13,7 @@ var assign = require('object-assign');
 var CHANGE_EVENT = 'change';
 
 var _digitsCouples = [],
+  _wordsLists = [],
   _lastInput;
 
 function updateCouples(numbers){
@@ -24,6 +26,12 @@ function updateCouples(numbers){
       str = '';
     }
   }
+}
+
+function updateWordsLists () {
+  _wordsLists = _digitsCouples.map(function(v,index,arr) {
+    return MfwWordsService.findCoupleFromDict(v);
+  });
 }
 
 var MfwOutputStore = assign({}, EventEmitter.prototype, {
@@ -42,6 +50,10 @@ var MfwOutputStore = assign({}, EventEmitter.prototype, {
 
   getCouples: function() {
     return _digitsCouples;
+  },
+
+  getWordsLists: function() {
+    return _wordsLists;
   }
 
 });
@@ -52,7 +64,10 @@ MfwOutputStore.dispatchToken = AppDispatcher.register(function(action){
   switch (action.actionType) {
     case MfwConstants.MFW_UPDATE_INPUT:
       error = Lib.restrictions(action.text).error;
-      if (!error) updateCouples(action.text);
+      if (!error) {
+        updateCouples(action.text);
+        updateWordsLists();
+      }
       MfwOutputStore.emitChange();
       break;
     default:
