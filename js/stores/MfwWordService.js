@@ -112,8 +112,7 @@ var MfwWordsService =  {
       };
     couple = coupleOfDigit;
     firstDigit = digitToChar[couple[0]];
-    secondDigit = digitToChar[couple[1]];
-    re = new RegExp (/[а-я]{4,16}\s{1}\d{1}\s{1}[м]{1}/g);
+    secondDigit = digitToChar[couple[1]] || 'а-я';
     regexp = new RegExp('^[уеыайъоэяиюьё]{0,2}['+firstDigit+']{1}[уеыаоэяйъиюьё]{0,2}['+secondDigit+']{1}[а-я]*$');
 
     wordsetResult = words.filter(function (element) {

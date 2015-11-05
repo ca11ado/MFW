@@ -4,7 +4,6 @@
 
 var EventEmitter = require('events').EventEmitter;
 var MfwConstants = require('../constants/MfwConstants');
-//var MfwDictionary = require('../constants/MfwDictionary');
 var MfwWordsService = require('./MfwWordService');
 var AppDispatcher = require('../dispatcher/MfwDispatcher');
 var Lib = require('./SmallLib');
@@ -14,24 +13,38 @@ var CHANGE_EVENT = 'change';
 
 var _digitsCouples = [],
   _wordsLists = [],
-  _lastInput;
+  _lastInput = '';
+
+function updateLastInput(txt) {
+  _lastInput = txt;
+}
 
 function updateCouples(numbers){
-  _digitsCouples = [];
-  var str = '';
-  for (var i=0; i<numbers.length; i++) {
-    str += numbers[i];
-    if (i%2 !== 0 || i === numbers.length-1) {
-      _digitsCouples.push(str);
-      str = '';
-    }
-  }
+  let re = /\d{1,2}/g;
+  if (numbers) _digitsCouples = numbers.match(re);
+  else _digitsCouples = [];
+  updateLastInput(numbers);
+}
+
+function updateCouple(position,couple) {
+  if (!_digitsCouples[position]) return false;
+  if (position == 'last') position = _digitsCouples.length - 1;
+  return _digitsCouples[position] = couple;
 }
 
 function updateWordsLists () {
-  _wordsLists = _digitsCouples.map(function(v,index,arr) {
-    return MfwWordsService.findCoupleFromDict(v);
-  });
+  if (_digitsCouples.length) {
+    _wordsLists = _digitsCouples.map(function(v) {
+      return MfwWordsService.findCoupleFromDict(v);
+    });
+  } else {
+    _wordsLists = [];
+  }
+}
+
+function updateWordList (coupleIndex) {
+  if (_digitsCouples[coupleIndex]) _wordsLists[coupleIndex] = MfwWordsService.findCoupleFromDict(_digitsCouples[coupleIndex]);
+  else _wordsLists[coupleIndex] = [];
 }
 
 var MfwOutputStore = assign({}, EventEmitter.prototype, {
@@ -63,10 +76,24 @@ MfwOutputStore.dispatchToken = AppDispatcher.register(function(action){
 
   switch (action.actionType) {
     case MfwConstants.MFW_UPDATE_INPUT:
-      error = Lib.restrictions(action.text).error;
-      if (!error) {
+      let editedCouples;
+      //console.log('lastInput %o and currentInput %o', _lastInput, action.text);
+      if (action.text == '') {
         updateCouples(action.text);
         updateWordsLists();
+      } else {
+        error = Lib.restrictions(action.text).error;
+        if (!error) {
+          editedCouples = Lib.getEditedCouples(_lastInput,action.text);
+          //console.log('Edited couples %o', editedCouples);
+          if (editedCouples.length > 0) {
+            updateCouples(action.text);
+            editedCouples.map((v,index) => updateWordList(v));
+          }
+          //updateLastInput(action.text); //??
+        } else {
+          //console.log('Error', error);
+        }
       }
       MfwOutputStore.emitChange();
       break;
