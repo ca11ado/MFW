@@ -13,6 +13,22 @@ function getMfwOutputState() {
   }
 }
 
+function markFirstSymbols(a,b,wordsArr) {
+  console.log('mark a %o b %o arr %o', a,b,wordsArr);
+  let re = b ? new RegExp('^([уеыайъоэяиюьё]{0,2})(['+a+']{1})([уеыаоэяйъиюьё]{0,2})(['+b+']{1})([а-я]*)$') :
+      new RegExp('^([уеыайъоэяиюьё]{0,2})(['+a+']{1})([а-я]*)$');
+  if (b) return wordsArr.map(function(v){
+    return v.replace(re,function(match, p1, p2, p3, p4,p5){
+      return p1 + ' ' + p2 + ' ' + p3 + ' ' + p4 + ' ' + p5;
+    });
+  });
+  else return wordsArr.map(function(v){
+    return v.replace(re,function(match, p1, p2, p3){
+      return p1 + '<b>' + p2 + '</b>' + p3;
+    });
+  });
+}
+
 var OutputSection = React.createClass({
 
   propTypes: {
@@ -36,6 +52,9 @@ var OutputSection = React.createClass({
     var words, list, self = this;
     var couples = this.state.couples.map(function(v,index,arr) {
       words = self.state.lists[index];
+      //console.log(words);
+      words = markFirstSymbols('м','м',words);
+      //console.log(words);
       words = words.map(function(v2, index2, arr2) {
         return React.createElement('li', {key:index2, className: 'wordsInList'+index }, v2);
       });
