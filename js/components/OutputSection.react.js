@@ -14,19 +14,19 @@ function getMfwOutputState() {
 }
 
 function markFirstSymbols(a,b,wordsArr) {
-  console.log('mark a %o b %o arr %o', a,b,wordsArr);
-  let re = b ? new RegExp('^([уеыайъоэяиюьё]{0,2})(['+a+']{1})([уеыаоэяйъиюьё]{0,2})(['+b+']{1})([а-я]*)$') :
-      new RegExp('^([уеыайъоэяиюьё]{0,2})(['+a+']{1})([а-я]*)$');
-  if (b) return wordsArr.map(function(v){
-    return v.replace(re,function(match, p1, p2, p3, p4,p5){
-      return p1 + ' ' + p2 + ' ' + p3 + ' ' + p4 + ' ' + p5;
+  let re = b ?
+    new RegExp('^([уеыайъоэяиюьё]{0,2})(['+a+']{1})([уеыаоэяйъиюьё]{0,2})(['+b+']{1})([а-я]*)$') :
+    new RegExp('^([уеыайъоэяиюьё]{0,2})(['+a+']{1})([а-я]*)$');
+  wordsArr = wordsArr.map(function (v) {
+    let p11,p22,p33,p44,p55;
+    v.replace(re,function(match, p1, p2, p3, p4,p5){
+      if (b) { p11 = p1; p22=p2; p33=p3; p44=p4; p55=p5;
+      } else { p11=p1; p22=p2; p33=p3; }
+      return '';
     });
+    return b ? [p11,p22,p33,p44,p55] : [p11,p22,p33];
   });
-  else return wordsArr.map(function(v){
-    return v.replace(re,function(match, p1, p2, p3){
-      return p1 + '<b>' + p2 + '</b>' + p3;
-    });
-  });
+  return wordsArr;
 }
 
 var OutputSection = React.createClass({
@@ -52,10 +52,14 @@ var OutputSection = React.createClass({
     var words, list, self = this;
     var couples = this.state.couples.map(function(v,index,arr) {
       words = self.state.lists[index];
-      //console.log(words);
       words = markFirstSymbols('м','м',words);
-      //console.log(words);
-      words = words.map(function(v2, index2, arr2) {
+
+      words = words.map(function(v2, index2) {
+        v2 = v2.map(function(v3,index3){
+          return (index3 % 2 === 0)
+            ? React.createElement('span', {key: index3}, v3)
+            : React.createElement('span', {key: index3, className: 'specialSymb'}, v3);
+        });
         return React.createElement('li', {key:index2, className: 'wordsInList'+index }, v2);
       });
       list = React.createElement('ul', {className: 'list' + index}, words);

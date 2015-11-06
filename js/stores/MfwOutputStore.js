@@ -90,7 +90,6 @@ MfwOutputStore.dispatchToken = AppDispatcher.register(function(action){
             updateCouples(action.text);
             editedCouples.map((v,index) => updateWordList(v));
           }
-          //updateLastInput(action.text); //??
         } else {
           //console.log('Error', error);
         }
