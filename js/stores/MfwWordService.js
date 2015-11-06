@@ -124,6 +124,22 @@ var MfwWordsService =  {
 
   },
 
+  getSymbsForDigit: function(digit) {
+    let digitToChar = {
+      0:'лн',
+      1:'рц',
+      2:'дг',
+      3:'тз',
+      4:'чкх',
+      5:'пб',
+      6:'шщж',
+      7:'с',
+      8:'вф',
+      9:'м'
+    };
+    return digit.length === 1 ? digitToChar[digit] : false;
+  },
+
   randOrd: function (){
     return (Math.round(Math.random())-0.5);
   }

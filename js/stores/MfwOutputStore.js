@@ -26,12 +26,6 @@ function updateCouples(numbers){
   updateLastInput(numbers);
 }
 
-function updateCouple(position,couple) {
-  if (!_digitsCouples[position]) return false;
-  if (position == 'last') position = _digitsCouples.length - 1;
-  return _digitsCouples[position] = couple;
-}
-
 function updateWordsLists () {
   if (_digitsCouples.length) {
     _wordsLists = _digitsCouples.map(function(v) {

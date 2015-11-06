@@ -50,10 +50,9 @@ var OutputSection = React.createClass({
 
   render: function() {
     var words, list, self = this;
-    var couples = this.state.couples.map(function(v,index,arr) {
+    var couples = this.state.couples.map(function(v,index) {
       words = self.state.lists[index];
       words = markFirstSymbols('м','м',words);
-
       words = words.map(function(v2, index2) {
         v2 = v2.map(function(v3,index3){
           return (index3 % 2 === 0)
