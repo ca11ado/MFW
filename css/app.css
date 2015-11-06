@@ -1,5 +1,5 @@
-.outputCouples {
-  width: 200px;
+.outputCouple {
+  width: 150px;
   float:left;
 }
 
@@ -46,5 +46,5 @@
 /*OutPutSection*/
 
 .specialSymb {
-  color:green;
+  color:orangered;
 }

@@ -137,7 +137,7 @@ var MfwWordsService =  {
       8:'вф',
       9:'м'
     };
-    return digit.length === 1 ? digitToChar[digit] : false;
+    return (digit && digit.length === 1) ? digitToChar[digit] : false;
   },
 
   randOrd: function (){

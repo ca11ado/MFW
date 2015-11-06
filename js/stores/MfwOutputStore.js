@@ -11,7 +11,7 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 
-var _digitsCouples = [],
+var _digitsCouples = {}, // {index,digitCouple,firstSymbol,secondSymbol}
   _wordsLists = [],
   _lastInput = '';
 
@@ -21,24 +21,35 @@ function updateLastInput(txt) {
 
 function updateCouples(numbers){
   let re = /\d{1,2}/g;
-  if (numbers) _digitsCouples = numbers.match(re);
-  else _digitsCouples = [];
+  _digitsCouples = {};
+  if (numbers) {
+    let match = numbers.match(re);
+    match.map(function(v,index) {
+      _digitsCouples[index] = [v,MfwWordsService.getSymbsForDigit(v[0]),MfwWordsService.getSymbsForDigit(v[1]) || '']
+    });
+  } else {
+    _digitsCouples = {};
+  }
   updateLastInput(numbers);
 }
 
 function updateWordsLists () {
-  if (_digitsCouples.length) {
-    _wordsLists = _digitsCouples.map(function(v) {
+  if (Object.keys(_digitsCouples).length) {
+    /*_wordsLists = _digitsCouples.map(function(v) {
       return MfwWordsService.findCoupleFromDict(v);
-    });
+    });*/
+    _wordsLists = new Array(Object.keys(_digitsCouples).length);
+    for (let key in _digitsCouples) {
+      if (_digitsCouples.hasOwnProperty(key)) _wordsLists[key] = MfwWordsService.findCoupleFromDict(_digitsCouples[key][0]);
+    }
   } else {
     _wordsLists = [];
   }
 }
 
 function updateWordList (coupleIndex) {
-  if (_digitsCouples[coupleIndex]) _wordsLists[coupleIndex] = MfwWordsService.findCoupleFromDict(_digitsCouples[coupleIndex]);
-  else _wordsLists[coupleIndex] = [];
+  _wordsLists[coupleIndex] = [];
+  if (_digitsCouples[coupleIndex]) _wordsLists[coupleIndex] = MfwWordsService.findCoupleFromDict(_digitsCouples[coupleIndex][0]);
 }
 
 var MfwOutputStore = assign({}, EventEmitter.prototype, {
