@@ -35,9 +35,6 @@ function updateCouples(numbers){
 
 function updateWordsLists () {
   if (Object.keys(_digitsCouples).length) {
-    /*_wordsLists = _digitsCouples.map(function(v) {
-      return MfwWordsService.findCoupleFromDict(v);
-    });*/
     _wordsLists = new Array(Object.keys(_digitsCouples).length);
     for (let key in _digitsCouples) {
       if (_digitsCouples.hasOwnProperty(key)) _wordsLists[key] = MfwWordsService.findCoupleFromDict(_digitsCouples[key][0]);

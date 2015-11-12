@@ -5,7 +5,7 @@
 module.exports = {
 
   restrictions : function (input) {
-    var MAX_DIGITS = 18;
+    var MAX_DIGITS = 32;
     var result = {error: false};
     if (!/^\d*$/.test(input)) {
       result.error = 'Можно использовать только цифры';
