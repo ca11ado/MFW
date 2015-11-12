@@ -36,6 +36,12 @@
   padding-top: 25px;
   float: left;
 }
+.reloadList {
+    font-weight: bold;
+    cursor: pointer;
+    list-style-image: url(/img/reload-icon-min.png);
+}
+
 #wrapLegend{
   width: 100%;
   padding: 10px;

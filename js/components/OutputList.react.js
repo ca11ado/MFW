@@ -49,6 +49,7 @@ var OutputList = React.createClass({
     });
     return (
       <ul className = {this.props.class}>
+        <li className="reloadList">refresh</li>
         {words}
       </ul>
     );
