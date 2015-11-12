@@ -39,7 +39,7 @@
 .reloadList {
     font-weight: bold;
     cursor: pointer;
-    list-style-image: url(/img/reload-icon-min.png);
+    list-style-image: url(../img/reload-icon-min.png);
 }
 
 #wrapLegend{
