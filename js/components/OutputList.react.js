@@ -5,7 +5,9 @@
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
 var OutputWord = require('./OutputWord.react');
+var MfwActions = require('../actions/MfwActions');
 
+const LIST_ID_PREFIX = 'list';
 
 function markFirstSymbols(a,b,wordsArr) {
   let re = b ?
@@ -42,17 +44,22 @@ var OutputList = React.createClass({
   render: function() {
     let words = this.props.words,
         symbols = this.props.symbols,
-        wordKey = this.props.listKey;
+        wordKey = LIST_ID_PREFIX + this.props.listCount;
     words = markFirstSymbols(symbols[0],symbols[1],words);
     words = words.map(function(v,index){
       return getOutputWord(wordKey+index, v[0], v[1], v[2], v[3], v[4]);
     });
     return (
       <ul className = {this.props.class}>
-        <li className="reloadList">refresh</li>
+        <li id={wordKey} className="reloadList" onClick={this._onClickRefresh}>refresh</li>
         {words}
       </ul>
     );
+  },
+
+  _onClickRefresh: function(e) {
+    let id = e.target.id;
+    MfwActions.updateWordsList(id.substring(LIST_ID_PREFIX.length));
   }
 
 });

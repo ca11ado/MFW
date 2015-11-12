@@ -90,7 +90,7 @@ MfwStore.dispatchToken = AppDispatcher.register(function (action) {
       MfwStore.emitChange();
       break;
     default:
-      console.log('Do not know this action');
+      //console.log('Do not know this action');
   }
 });
 

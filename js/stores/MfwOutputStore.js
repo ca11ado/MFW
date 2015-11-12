@@ -79,7 +79,6 @@ MfwOutputStore.dispatchToken = AppDispatcher.register(function(action){
   switch (action.actionType) {
     case MfwConstants.MFW_UPDATE_INPUT:
       let editedCouples;
-      //console.log('lastInput %o and currentInput %o', _lastInput, action.text);
       if (action.text == '') {
         updateCouples(action.text);
         updateWordsLists();
@@ -87,7 +86,6 @@ MfwOutputStore.dispatchToken = AppDispatcher.register(function(action){
         error = Lib.restrictions(action.text).error;
         if (!error) {
           editedCouples = Lib.getEditedCouples(_lastInput,action.text);
-          //console.log('Edited couples %o', editedCouples);
           if (editedCouples.length > 0) {
             updateCouples(action.text);
             editedCouples.map((v,index) => updateWordList(v));
@@ -96,6 +94,10 @@ MfwOutputStore.dispatchToken = AppDispatcher.register(function(action){
           //console.log('Error', error);
         }
       }
+      MfwOutputStore.emitChange();
+      break;
+    case MfwConstants.MFW_UPDATE_LIST:
+      updateWordList(action.index);
       MfwOutputStore.emitChange();
       break;
     default:

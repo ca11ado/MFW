@@ -19,7 +19,7 @@ function getOutputList(key, words, symbols) {
     <OutputList
       class = 'outputCouple'
       key = {key}
-      listKey = {key}
+      listCount = {key}
       words = {words}
       symbols = {symbols}
     />
@@ -62,7 +62,7 @@ var OutputSection = React.createClass({
 
         words = this.state.lists[key];
         symbols= [couples[key][1],couples[key][2]];
-        wordsLists.push(getOutputList('list'+key, words,symbols));
+        wordsLists.push(getOutputList(key, words,symbols));
       }
     }
     return (

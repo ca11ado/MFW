@@ -12,5 +12,6 @@ module.exports = keyMirror({
     TODO_TOGGLE_COMPLETE_ALL: null,
     TODO_UNDO_COMPLETE: null,
     TODO_UPDATE_TEXT: null*/
-    MFW_UPDATE_INPUT: null
+    MFW_UPDATE_INPUT: null,
+    MFW_UPDATE_LIST: null
 });
