@@ -11,7 +11,7 @@ var assign = require('object-assign');
 
 var CHANGE_EVENT = 'change';
 
-var _digitsCouples = {}, // {index,digitCouple,firstSymbol,secondSymbol}
+var _digitsCouples = {}, // { digitCouple,firstSymbol,secondSymbol }
   _wordsLists = [],
   _lastInput = '';
 

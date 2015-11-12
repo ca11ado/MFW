@@ -5,6 +5,7 @@
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
 var MfwOutputStore = require('../stores/MfwOutputStore');
+var OutputWord = require('./OutputWord.react');
 
 function getMfwOutputState() {
   return {
@@ -31,6 +32,19 @@ function markFirstSymbols(a,b,wordsArr) {
   return wordsArr;
 }
 
+function getOutputWord(index, firstPart, firstSymb, secondPart = '', secondSymb = '', thirdPart = '') {
+  return (
+    <OutputWord
+      key = {'word' + index}
+      firstPart = {firstPart}
+      firstSymb = {firstSymb}
+      secondPart = {secondPart}
+      secondSymb = {secondSymb}
+      thirdPart = {thirdPart}
+    />
+  );
+}
+
 var OutputSection = React.createClass({
 
   propTypes: {
@@ -51,32 +65,25 @@ var OutputSection = React.createClass({
   },
 
   render: function() {
-    //console.log('Couple %o, Lists %o', Object.keys(this.state.couples).length, this.state.lists.length);
-    //console.log('Couples %o', this.state.couples);
+
     let couples = this.state.couples,
       lists,
-      wordsLists = [];
+      wordsLists = [],
+      oneList = [];
 
     for (let key in couples) {
-      if (couples.hasOwnProperty(key)) { // couples, firstSymb, [secondSymb]
+      if (couples.hasOwnProperty(key)) { // couple, firstSymb, [secondSymb]
         let words = this.state.lists[key];
-        //console.dir(this.state.lists);
-        //console.log(words, this.state.lists[key], key);
-        //console.log('Couple k0 %o k1 %o k2 %o', couples[key][0],couples[key][1],couples[key][2]);
-        //console.log(couples);
+
         words = markFirstSymbols(couples[key][1],couples[key][2],words);
-        //console.log('Words %o', words);
+
         words = words.map(function (v,index) {
-          v = v.map(function(v3,index3){
-            return (index3 % 2 === 0)
-              ? React.createElement('span', {key: 'span' + index3}, v3)
-              : React.createElement('span', {key: 'span' +  index3, className: 'specialSymb'}, v3);
-          });
-          return React.createElement('li', {key: 'li' + index + key, className: 'wordsInList'+key }, v);
+          oneList.push(getOutputWord(key+index,v[0], v[1], v[2], v[3], v[4]));
         });
-        //console.log('Words %o', words);
-        lists = (React.createElement('ul', {key: key, className: 'list' + key}, words));
+
+        lists = React.createElement('ul', {key: key, className: 'list' + key}, oneList);
         wordsLists.push(React.createElement('div', {key: key, className: 'outputCouple'}, lists));
+        oneList = [];
       }
     }
     return (
