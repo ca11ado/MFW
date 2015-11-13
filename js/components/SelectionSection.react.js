@@ -14,6 +14,10 @@ function getMfwOutputState() {
 
 var SelectionSection = React.createClass({
 
+  getInitialState: function() {
+    return getMfwOutputState();
+  },
+
   componentDidMount: function(){
     MfwOutputStore.addChangeListener(this._onChange);
   },
@@ -23,7 +27,7 @@ var SelectionSection = React.createClass({
   },
 
   render: function() {
-    var words = this.props.getSelected.map(function(v,index,arr){
+    var words = this.state.getSelected.map(function(v,index,arr){
       return React.createElement('span', {key:index}, v + ' ');
     });
     return (
