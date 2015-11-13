@@ -19,7 +19,7 @@ var OutputWord = React.createClass({
 
   render: function() {
     return (
-      <li>
+      <li onClick={this._onClickWord}>
         <span>{this.props.firstPart}</span>
         <span className="specialSymb">{this.props.firstSymb}</span>
         <span>{this.props.secondPart}</span>
@@ -27,6 +27,10 @@ var OutputWord = React.createClass({
         <span>{this.props.thirdPart}</span>
       </li>
     );
+  },
+
+  _onClickWord: function(e) {
+    console.log(e.currentTarget.textContent);
   }
 
 });
