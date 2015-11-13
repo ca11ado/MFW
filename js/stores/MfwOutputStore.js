@@ -55,7 +55,7 @@ function updateSelectedWords(word,index) {
     console.log(index == arrIn, word);
     if (index == arrIn) _selectedWords[arrIn] = word;
     else {
-      _selectedWords[arrIn] = _selectedWords[arrIn] || '';
+      _selectedWords[arrIn] = _selectedWords[arrIn] || '...';
     }
   });
 }
