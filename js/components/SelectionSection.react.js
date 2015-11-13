@@ -2,13 +2,24 @@
  * Created by tos on 02.11.2015.
  */
 
+let MfwOutputStore = require('../stores/MfwOutputStore');
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
 
+function getMfwOutputState() {
+  return {
+    getSelected: MfwOutputStore.getSelectedWords()
+  }
+}
+
 var SelectionSection = React.createClass({
 
-  propTypes: {
-    getSelected: ReactPropTypes.array.isRequired
+  componentDidMount: function(){
+    MfwOutputStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function(){
+    MfwOutputStore.removeChangeListener(this._onChange);
   },
 
   render: function() {
@@ -20,6 +31,10 @@ var SelectionSection = React.createClass({
         {words}
       </div>
     );
+  },
+
+  _onChange: function() {
+    this.setState(getMfwOutputState());
   }
 });
 

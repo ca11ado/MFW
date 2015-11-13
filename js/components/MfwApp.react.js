@@ -17,8 +17,7 @@ function getMfwState() {
   return {
     getRules: MfwStore.getRules(),
     getInfo: MfwStore.getInformation(),
-    getTextHandler: MfwStore.getTextHandler(),
-    getSelectedWords: MfwOutputStore.getSelectedWords()
+    getTextHandler: MfwStore.getTextHandler()
   }
 }
 
@@ -40,7 +39,7 @@ var MfwApp = React.createClass({
       <div id='wrapMain'>
         <InfoSection id='wrapInfoField' getInfo={this.state.getInfo} />
         <InputSection id='wrapSearchBar' getHandler={this.state.getTextHandler} />
-        <SelectionSection id='wrapStory' getSelected={this.state.getSelectedWords} />
+        <SelectionSection id='wrapStory' />
         <OutputSection id='wrapWordsLists' />
         <LegendaSection id='wrapLegend' getRules={this.state.getRules} />
       </div>
