@@ -19,9 +19,7 @@ var _rules = [
     'Максимум 16 пар чисел'
   ],
   _infoSecText = 'Enter number',
-  _textHandler = '',
-  _selectedWords = [],
-  _output = [];
+  _textHandler = '';
 
 function updateAll(numbers) {
   updateOutput(numbers); // before updateInputNumber()
@@ -46,10 +44,6 @@ function updateOutput(numbers){
 }
 
 var MfwStore = assign({}, EventEmitter.prototype, {
-
-  getSelectedWords: function(){
-    return _selectedWords;
-  },
 
   getRules: function() {
     return _rules;

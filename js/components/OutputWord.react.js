@@ -2,20 +2,12 @@
  * Created by tos on 12.11.2015.
  */
 
-var React = require('react');
-var ReactPropTypes = React.PropTypes;
+let React = require('react'),
+    ReactPropTypes = React.PropTypes,
+    MfwActions = require('../actions/MfwActions');
+
 
 var OutputWord = React.createClass({
-
-  getInitialState: function() {
-    return {
-      firstPart: '',
-      firstSymb: '',
-      secondPart: '',
-      secondSymb: '',
-      thirdPart: ''
-    };
-  },
 
   render: function() {
     return (
@@ -30,7 +22,7 @@ var OutputWord = React.createClass({
   },
 
   _onClickWord: function(e) {
-    console.log(e.currentTarget.textContent);
+    MfwActions.updateSelectedWords(e.currentTarget.textContent,this.props.listIndex);
   }
 
 });

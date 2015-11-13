@@ -13,7 +13,8 @@ var CHANGE_EVENT = 'change';
 
 var _digitsCouples = {}, // { digitCouple,firstSymbol,secondSymbol }
   _wordsLists = [],
-  _lastInput = '';
+  _lastInput = '',
+  _selectedWords = [];
 
 function updateLastInput(txt) {
   _lastInput = txt;
@@ -49,6 +50,16 @@ function updateWordList (coupleIndex) {
   if (_digitsCouples[coupleIndex]) _wordsLists[coupleIndex] = MfwWordsService.findCoupleFromDict(_digitsCouples[coupleIndex][0]);
 }
 
+function updateSelectedWords(word,index) {
+  return _wordsLists.map(function (v,arrIn) {
+    console.log(index == arrIn, word);
+    if (index == arrIn) _selectedWords[arrIn] = word;
+    else {
+      _selectedWords[arrIn] = _selectedWords[arrIn] || '';
+    }
+  });
+}
+
 var MfwOutputStore = assign({}, EventEmitter.prototype, {
 
   emitChange: function() {
@@ -69,6 +80,10 @@ var MfwOutputStore = assign({}, EventEmitter.prototype, {
 
   getWordsLists: function() {
     return _wordsLists;
+  },
+
+  getSelectedWords: function(){
+    return _selectedWords;
   }
 
 });
@@ -98,6 +113,11 @@ MfwOutputStore.dispatchToken = AppDispatcher.register(function(action){
       break;
     case MfwConstants.MFW_UPDATE_LIST:
       updateWordList(action.index);
+      MfwOutputStore.emitChange();
+      break;
+    case MfwConstants.MFW_UPDATE_SELECTED_WORDS:
+      console.log('Dispatch: ', action);
+      updateSelectedWords(action.word, action.listIndex);
       MfwOutputStore.emitChange();
       break;
     default:

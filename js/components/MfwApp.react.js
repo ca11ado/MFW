@@ -10,6 +10,7 @@ var SelectionSection = require('./SelectionSection.react');
 var OutputSection = require('./OutputSection.react');
 var LegendaSection = require('./LegendaSection.react');
 var MfwStore = require('../stores/MfwStore');
+var MfwOutputStore = require('../stores/MfwOutputStore');
 
 function getMfwState() {
   // get state from the store
@@ -17,7 +18,7 @@ function getMfwState() {
     getRules: MfwStore.getRules(),
     getInfo: MfwStore.getInformation(),
     getTextHandler: MfwStore.getTextHandler(),
-    getSelectedWords: MfwStore.getSelectedWords()
+    getSelectedWords: MfwOutputStore.getSelectedWords()
   }
 }
 

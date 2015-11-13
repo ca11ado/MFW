@@ -19,6 +19,14 @@ var MfwActions = {
       actionType: MfwConstants.MFW_UPDATE_LIST,
       index: listIndex
     });
+  },
+
+  updateSelectedWords: function(word,listIndex) {
+    AppDispatcher.dispatch({
+      actionType: MfwConstants.MFW_UPDATE_SELECTED_WORDS,
+      word: word,
+      listIndex: listIndex
+    });
   }
 
 };

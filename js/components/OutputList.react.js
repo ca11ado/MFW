@@ -26,10 +26,11 @@ function markFirstSymbols(a,b,wordsArr) {
   return wordsArr;
 }
 
-function getOutputWord(index, firstPart, firstSymb, secondPart = '', secondSymb = '', thirdPart = '') {
+function getOutputWord(listIndex, index, firstPart, firstSymb, secondPart = '', secondSymb = '', thirdPart = '') {
   return (
     <OutputWord
       key = {'word' + index}
+      listIndex = {listIndex}
       firstPart = {firstPart}
       firstSymb = {firstSymb}
       secondPart = {secondPart}
@@ -44,10 +45,11 @@ var OutputList = React.createClass({
   render: function() {
     let words = this.props.words,
         symbols = this.props.symbols,
+        listIndex = this.props.listCount,
         wordKey = LIST_ID_PREFIX + this.props.listCount;
     words = markFirstSymbols(symbols[0],symbols[1],words);
     words = words.map(function(v,index){
-      return getOutputWord(wordKey+index, v[0], v[1], v[2], v[3], v[4]);
+      return getOutputWord(listIndex, wordKey+index, v[0], v[1], v[2], v[3], v[4]);
     });
     return (
       <ul className = {this.props.class}>

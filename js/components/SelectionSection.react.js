@@ -16,7 +16,7 @@ var SelectionSection = React.createClass({
       return React.createElement('span', {key:index}, v + ' ');
     });
     return (
-      <div>
+      <div id={this.props.id}>
         {words}
       </div>
     );
