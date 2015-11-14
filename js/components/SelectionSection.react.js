@@ -45,6 +45,7 @@ var SelectionSection = React.createClass({
 
   _onChange: function() {
     this.setState(getMfwOutputState());
+    document.getElementsByTagName('input')[0].focus();
   },
 
   _clearSelected: function(){
