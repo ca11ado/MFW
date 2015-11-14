@@ -23,8 +23,9 @@
   },
   "scripts": {
     "start": "watchify -o js/bundle.js -v -d js/app.js -t [babelify --presets [ es2015 react ] ]",
-    "build": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
-    "test": "jest"
+    "build-flux": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
+    "test": "jest",
+    "build": "browserify -t [babelify --presets [ es2015 react ] ] js/app.js | uglifyjs > js/bundle.js"
   },
   "author": "Anton Khimtsov",
   "browserify": {
