@@ -54,8 +54,9 @@ function updateSelectedWords(word,index) {
   return _wordsLists.map(function (v,arrIn) {
     if (index == arrIn) _selectedWords[arrIn] = word;
     else {
-      _selectedWords[arrIn] = _selectedWords[arrIn] || '...';
+      _selectedWords[arrIn] = _selectedWords[arrIn] || '';
     }
+    _selectedWords.length = Object.keys(_digitsCouples).length;
   });
 }
 
@@ -112,6 +113,8 @@ MfwOutputStore.dispatchToken = AppDispatcher.register(function(action){
           //console.log('Error', error);
         }
       }
+
+      updateSelectedWords();
       MfwOutputStore.emitChange();
       break;
     case MfwConstants.MFW_UPDATE_LIST:

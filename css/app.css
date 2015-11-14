@@ -53,6 +53,9 @@
     color:orangered;
 }
 
+.selectedWords{
+    margin-left: 10px;
+}
 .removeSelected{
     margin-right: 30px;
     background-image: url("../img/delete-min.png");
