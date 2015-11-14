@@ -52,12 +52,15 @@ function updateWordList (coupleIndex) {
 
 function updateSelectedWords(word,index) {
   return _wordsLists.map(function (v,arrIn) {
-    console.log(index == arrIn, word);
     if (index == arrIn) _selectedWords[arrIn] = word;
     else {
       _selectedWords[arrIn] = _selectedWords[arrIn] || '...';
     }
   });
+}
+
+function clearSelectedWords(){
+  _selectedWords = [];
 }
 
 var MfwOutputStore = assign({}, EventEmitter.prototype, {
@@ -117,6 +120,10 @@ MfwOutputStore.dispatchToken = AppDispatcher.register(function(action){
       break;
     case MfwConstants.MFW_UPDATE_SELECTED_WORDS:
       updateSelectedWords(action.word, action.listIndex);
+      MfwOutputStore.emitChange();
+      break;
+    case MfwConstants.MFW_CLEAR_SELECTED_WORDS:
+      clearSelectedWords();
       MfwOutputStore.emitChange();
       break;
     default:

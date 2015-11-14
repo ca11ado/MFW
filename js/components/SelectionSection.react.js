@@ -2,7 +2,8 @@
  * Created by tos on 02.11.2015.
  */
 
-let MfwOutputStore = require('../stores/MfwOutputStore');
+let MfwOutputStore = require('../stores/MfwOutputStore'),
+    MfwActions = require('../actions/MfwActions');
 var React = require('react');
 var ReactPropTypes = React.PropTypes;
 
@@ -30,7 +31,7 @@ var SelectionSection = React.createClass({
     var words = this.state.getSelected.map(function(v,index,arr){
       return React.createElement('span', {key:index}, v + ' ');
     });
-    let remove = words.length ? React.createElement('img', {className:'removeSelected', src:'img/delete-min.png'}) : '';
+    let remove = words.length ? React.createElement('img', {onClick: this._clearSelected,className:'removeSelected', src:'img/delete-min.png'}) : '';
     return (
       <div id={this.props.id}>
         {remove}
@@ -41,6 +42,10 @@ var SelectionSection = React.createClass({
 
   _onChange: function() {
     this.setState(getMfwOutputState());
+  },
+
+  _clearSelected: function(){
+    MfwActions.clearSelectedWords();
   }
 });
 

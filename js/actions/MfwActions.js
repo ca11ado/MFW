@@ -27,6 +27,12 @@ var MfwActions = {
       word: word,
       listIndex: listIndex
     });
+  },
+
+  clearSelectedWords: function() {
+    AppDispatcher.dispatch({
+      actionType: MfwConstants.MFW_CLEAR_SELECTED_WORDS
+    });
   }
 
 };
