@@ -51,7 +51,8 @@ function updateWordList (coupleIndex) {
 }
 
 function updateSelectedWords(word,index) {
-  return _wordsLists.map(function (v,arrIn) {
+  if (!_wordsLists.length) _selectedWords = [];
+  _wordsLists.map(function (v,arrIn) {
     if (index == arrIn) _selectedWords[arrIn] = word;
     else {
       _selectedWords[arrIn] = _selectedWords[arrIn] || '';
@@ -113,7 +114,6 @@ MfwOutputStore.dispatchToken = AppDispatcher.register(function(action){
           //console.log('Error', error);
         }
       }
-
       updateSelectedWords();
       MfwOutputStore.emitChange();
       break;
