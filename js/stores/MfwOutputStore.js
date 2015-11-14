@@ -116,7 +116,6 @@ MfwOutputStore.dispatchToken = AppDispatcher.register(function(action){
       MfwOutputStore.emitChange();
       break;
     case MfwConstants.MFW_UPDATE_SELECTED_WORDS:
-      console.log('Dispatch: ', action);
       updateSelectedWords(action.word, action.listIndex);
       MfwOutputStore.emitChange();
       break;

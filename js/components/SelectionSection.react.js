@@ -30,7 +30,7 @@ var SelectionSection = React.createClass({
     var words = this.state.getSelected.map(function(v,index,arr){
       return React.createElement('span', {key:index}, v + ' ');
     });
-    let remove = words.length ? React.createElement('span', {className:'removeSelected'}, 'x ') : '';
+    let remove = words.length ? React.createElement('img', {className:'removeSelected', src:'img/delete-min.png'}) : '';
     return (
       <div id={this.props.id}>
         {remove}

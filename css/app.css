@@ -52,3 +52,8 @@
 .specialSymb {
     color:orangered;
 }
+
+.removeSelected{
+    margin-right: 30px;
+    background-image: url("../img/delete-min.png");
+}
