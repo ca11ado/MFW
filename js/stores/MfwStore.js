@@ -88,9 +88,4 @@ MfwStore.dispatchToken = AppDispatcher.register(function (action) {
   }
 });
 
-/*setTimeout(function(){
-  _selectedWords.push('мама','дед');
- MfwStore.emit(CHANGE_EVENT);
- },2000);*/
-
 module.exports = MfwStore;
