@@ -5,6 +5,7 @@
   "repository": "https://github.com/ca11ado/MFW/",
   "main": "js/app.js",
   "dependencies": {
+    "express": "^4.13.3",
     "flux": "^2.0.1",
     "keymirror": "~0.1.0",
     "object-assign": "^1.0.0",
@@ -22,10 +23,10 @@
     "watchify": "^2.1.1"
   },
   "scripts": {
-    "start": "watchify -o js/bundle.js -v -d js/app.js -t [babelify --presets [ es2015 react ] ]",
-    "build-flux": "browserify . -t [envify --NODE_ENV production] | uglifyjs -cm > js/bundle.min.js",
+    "start": "node app.js",
+    "start2": "watchify -o public/js/bundle.js -v -d src/js/app.js -t [babelify --presets [ es2015 react ] ]",
     "test": "jest",
-    "build": "browserify -t [babelify --presets [ es2015 react ] ] js/app.js | uglifyjs > js/bundle.js"
+    "build": "browserify -t [babelify --presets [ es2015 react ] ] src/js/app.js | uglifyjs > public/js/bundle.js"
   },
   "author": "Anton Khimtsov",
   "browserify": {
